@@ -160,7 +160,7 @@ qwebirc.ui.LoginBox = function(parentElement, callback, initialNickname, initial
     chanStyle = {display: "none"};
   
   var chan = new Element("input");
-  createRow("Channels:", chan, chanStyle);
+  //createRow("Channels:", chan, chanStyle);
 
   if(qwebirc.auth.enabled()) {
     if(qwebirc.auth.passAuth()) {

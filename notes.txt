@@ -1,0 +1,6 @@
+==============================
+auto-join the channels on connect
+file : irc/commands.js
+function cmd_autojoin
+
+file : ui/panes/connect.js
