@@ -220,7 +220,7 @@ qwebirc.irc.IRCClient = new Class({
       this.exec("/UMODE +x");
       
     if(true) {
-        this.options.autojoin = '#brouhaha,#test,#test3';
+      this.options.autojoin = '#brouhaha,#test,#test3';
       if(qwebirc.auth.loggedin() && this.ui.uiOptions.USE_HIDDENHOST) {
         var d = function() {
           if($defined(this.activeTimers.autojoin))

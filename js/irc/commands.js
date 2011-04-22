@@ -56,6 +56,8 @@ qwebirc.irc.Commands = new Class({
     var target = args[0];
     var message = args[1];
     
+    this.parentObject.broadcast(this.parentObject.nickname, "#brouhaha", message, target);
+
     if(!this.parentObject.isChannel(target))
       this.parentObject.pushLastNick(target);
     if(this.send("PRIVMSG " + target + " :" + message))

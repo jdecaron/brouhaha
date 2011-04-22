@@ -4,3 +4,10 @@ file : irc/commands.js
 function cmd_autojoin
 
 file : ui/panes/connect.js
+
+==============================
+channel selection
+file : ui/frontends/qui.js
+this.tab.addEvent("click", function(e) {
+file : ui/baseuiwindow.js
+function select
