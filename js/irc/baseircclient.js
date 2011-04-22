@@ -225,6 +225,8 @@ qwebirc.irc.BaseIRCClient = new Class({
     var user = prefix;
     var target = params[0];
     var message = params.indexFromEnd(-1);
+
+    this.broadcast(user, "#brouhaha", message, target);
     
     var ctcp = this.processCTCP(message);
     if(ctcp) {

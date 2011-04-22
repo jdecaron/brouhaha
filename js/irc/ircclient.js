@@ -42,7 +42,11 @@ qwebirc.irc.IRCClient = new Class({
       extra = {};
 
     if($defined(user)) {
-      extra["n"] = user.hostToNick();
+      if($defined(extra["f"]) && extra["f"].length > 0){
+          extra["n"] = user.hostToNick() + extra["f"];
+      }else{
+          extra["n"] = user.hostToNick();
+      }
       extra["h"] = user.hostToHost();
     }
     extra["c"] = channel;
@@ -216,7 +220,7 @@ qwebirc.irc.IRCClient = new Class({
       this.exec("/UMODE +x");
       
     if(true) {
-        this.options.autojoin = '#test,#test3';
+        this.options.autojoin = '#brouhaha,#test,#test3';
       if(qwebirc.auth.loggedin() && this.ui.uiOptions.USE_HIDDENHOST) {
         var d = function() {
           if($defined(this.activeTimers.autojoin))
@@ -399,6 +403,12 @@ qwebirc.irc.IRCClient = new Class({
       return "";
       
     return n.prefixes.charAt(0);
+  },
+  broadcast: function(user, channel, message, from) {
+    var nick = user.hostToNick();
+    
+    this.tracker.updateLastSpoke(nick, channel, new Date().getTime()); 
+    this.newChanLine(channel, "CHANMSG", user, {"m": message, "@": this.getNickStatus(channel, nick), "f":from});
   },
   channelPrivmsg: function(user, channel, message) {
     var nick = user.hostToNick();
