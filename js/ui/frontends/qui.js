@@ -361,12 +361,18 @@ qwebirc.ui.QUI.Window = new Class({
     
     this.tab.appendText(name);
     this.tab.addEvent("click", function(e) {
-      new Event(e).stop();
-      
-      if(this.closed)
-        return;
-        
-      parentObject.selectWindow(this);
+      window.name = this.name;
+      date = new Date();
+      date = date.getTime();
+      if(date <= this.lastClick + 500){
+          new Event(e).stop();
+          
+          if(this.closed)
+            return;
+            
+          parentObject.selectWindow(this);
+      }
+      this.lastClick = date;
     }.bind(this));
     
     if(type != qwebirc.ui.WINDOW_STATUS && type != qwebirc.ui.WINDOW_CONNECT) {

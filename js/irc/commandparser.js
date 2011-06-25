@@ -71,6 +71,7 @@ qwebirc.irc.BaseCommandParser = new Class({
         }
         return;
       }
+      //alert(cmdopts);
       
       var activewin = cmdopts[0];
       var splitargs = cmdopts[1];

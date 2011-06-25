@@ -18,7 +18,7 @@ from qwebirc.config_options import *
 #         Hostname (or IP address) of IRC server to connect to.
 # OPTION: IRCPORT
 #         Port of IRC server to connect to.
-IRCSERVER, IRCPORT = "x23800", 6667
+IRCSERVER, IRCPORT = "10.166.100.29", 6667
 
 # OPTION: REALNAME
 #         The realname field of IRC clients will be set to this value.
