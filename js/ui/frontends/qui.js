@@ -138,6 +138,15 @@ qwebirc.ui.QUI = new Class({
     
     document.addEvent("mousedown", hider2);
     document.addEvent("keypress", hider2);
+    window.addEvent("keypress", function(e) {
+        element = document.getElementsByTagName('input')[0];
+        if(element.className == 'keyboard-input'){
+            if(!window.keyboardInputFocus){
+                element.value = element.value + e.key;
+            }
+            element.focus();
+        }
+    });
   },
   createInput: function() {
     var form = new Element("form");
@@ -182,6 +191,8 @@ qwebirc.ui.QUI = new Class({
       this.qjsui.addEvent("reflow", reflowButton);
     } else {
       inputbox.addClass("keyboard-input");
+      inputbox.addEvent('blur', function(){window.keyboardInputFocus = 0});
+      inputbox.addEvent('focus', function(){window.keyboardInputFocus = 1});
     }
     
     form.addEvent("submit", function(e) {
