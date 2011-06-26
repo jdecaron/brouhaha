@@ -375,15 +375,15 @@ qwebirc.ui.QUI.Window = new Class({
       window.name = this.name;
       date = new Date();
       date = date.getTime();
-      if(date <= this.lastClick + 500){
-          new Event(e).stop();
-          
-          if(this.closed)
-            return;
-            
-          parentObject.selectWindow(this);
-      }
       this.lastClick = date;
+    }.bind(this));
+    this.tab.addEvent("dblclick", function(e) {
+      new Event(e).stop();
+      
+      if(this.closed)
+        return;
+        
+      parentObject.selectWindow(this);
     }.bind(this));
     
     if(type != qwebirc.ui.WINDOW_STATUS && type != qwebirc.ui.WINDOW_CONNECT) {
