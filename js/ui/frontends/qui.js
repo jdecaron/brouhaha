@@ -152,7 +152,11 @@ qwebirc.ui.QUI = new Class({
     
     form.addClass("input");
     
+    var channelName = new Element("span");
+    channelName.innerHTML = "#brouhaha";
+    channelName.setAttribute("id", "channel-name-id");
     var inputbox = new Element("input");
+    form.appendChild(channelName);
     form.appendChild(inputbox);
     this.inputbox = inputbox;
     this.inputbox.maxLength = 470;
@@ -188,6 +192,7 @@ qwebirc.ui.QUI = new Class({
       }.bind(this);
       this.qjsui.addEvent("reflow", reflowButton);
     } else {
+      channelName.addClass("channel-name");
       inputbox.addClass("keyboard-input");
       inputbox.addEvent('blur', function(){window.keyboardInputFocus = 0});
       inputbox.addEvent('focus', function(){window.keyboardInputFocus = 1});
@@ -370,10 +375,11 @@ qwebirc.ui.QUI.Window = new Class({
     
     this.tab.appendText(name);
     this.tab.addEvent("click", function(e) {
-      window.name = this.name;
-      date = new Date();
-      date = date.getTime();
-      this.lastClick = date;
+      if(this.name != '#brouhaha'){
+          window.name = this.name;
+          element = document.getElementById('channel-name-id');
+          element.innerHTML = this.name;
+      }
     }.bind(this));
     this.tab.addEvent("dblclick", function(e) {
       new Event(e).stop();

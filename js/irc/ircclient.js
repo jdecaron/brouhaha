@@ -43,6 +43,9 @@ qwebirc.irc.IRCClient = new Class({
 
     if($defined(user)) {
       if($defined(extra["f"]) && extra["f"].length > 0 && extra["f"][0] == '#'){
+          if(extra["f"] == '#brouhaha'){
+              extra["f"] = window.name;
+          }
           extra["n"] = user.hostToNick() + extra["f"];
       }else{
           extra["n"] = user.hostToNick();

@@ -88,7 +88,7 @@ html {
 .qwebirc-qui .input input.keyboard-input {
   border: 0px;
   margin: 2px 0px 0px 0px;
-  width: 99%;
+  width: 90%;
 }
 
 .qwebirc-qui .input input.mobile-input {
@@ -145,6 +145,19 @@ html {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   margin-right: -2px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: $(tab_text);
+}
+
+.channel-name {
+  background-color:#e7efff;
+  border: 1px solid $(tab_border);
+  font-size: 0.8em;
+  padding: 2px;
+  cursor: default;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
   white-space: nowrap;
   text-decoration: none;
   color: $(tab_text);
