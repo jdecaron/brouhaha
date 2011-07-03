@@ -330,7 +330,19 @@ qwebirc.ui.StandardUI = new Class({
         if(this.uiOptions.QUERY_ON_NICK_CLICK) {
           window.client.exec("/QUERY " + nick);
         } else {
-          window.client.exec("/WHOIS " + nick);
+          if(nick.search('#') >= 0){
+              nick = nick.substr(0, nick.search('#'));
+          }else{
+             if(nick.search('>') >= 0){
+                nick_b = nick;
+                nick = nick.substr(0, nick.search('>'));
+                if(window.client.nickname == nick){
+                    nick = nick_b.substr(nick_b.search('>') + 1, nick.length);
+                }
+             }
+          }
+          document.getElementById('channel-name-id').innerHTML = nick;
+          //window.client.exec("/WHOIS " + nick);
         }
       }.bind(this)];
     }

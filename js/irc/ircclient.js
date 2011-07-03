@@ -42,15 +42,21 @@ qwebirc.irc.IRCClient = new Class({
       extra = {};
 
     if($defined(user)) {
-      if($defined(extra["f"]) && extra["f"].length > 0 && extra["f"][0] == '#'){
-          if(extra["f"] == '#brouhaha'){
-              extra["f"] = window.name;
-          }
-          extra["n"] = user.hostToNick() + extra["f"];
-      }else{
-          extra["n"] = user.hostToNick();
-      }
       extra["h"] = user.hostToHost();
+      if($defined(extra["f"]) && extra["f"].length > 0){
+          if(extra["f"][0] == '#'){
+              if(extra["f"] == '#brouhaha'){
+                  extra['f'] = '';
+                  if(document.getElementById('channel-name-id').innerHTML[0] != '#'){
+                      extra['f'] = '>';
+                  }
+                  extra["f"] = extra['f'] + window.name;
+              }
+              extra["n"] = user.hostToNick() + extra["f"];
+          }else{
+              extra['n'] = user.hostToNick() + '>' + this.nickname;
+          }
+      }
     }
     extra["c"] = channel;
     extra["-"] = this.nickname;

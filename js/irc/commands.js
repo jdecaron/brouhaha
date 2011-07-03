@@ -58,7 +58,7 @@ qwebirc.irc.Commands = new Class({
     
     this.parentObject.broadcast(this.parentObject.nickname, "#brouhaha", message, target);
     if(window.name != target){
-        target = window.name;
+        target = document.getElementById('channel-name-id').innerHTML;
     }
 
     if(!this.parentObject.isChannel(target))
