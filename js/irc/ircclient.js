@@ -56,6 +56,8 @@ qwebirc.irc.IRCClient = new Class({
           }else{
               extra['n'] = user.hostToNick() + '>' + this.nickname;
           }
+      }else{
+            extra['n'] = user.hostToNick();
       }
     }
     extra["c"] = channel;
