@@ -380,7 +380,7 @@ qwebirc.ui.QUI.Window = new Class({
           element = document.getElementById('channel-name-id');
           element.innerHTML = this.name;
 
-          streamTextHighlight();
+          highlightText();
       }
     }.bind(this));
     this.tab.addEvent("dblclick", function(e) {

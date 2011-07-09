@@ -253,6 +253,7 @@ qwebirc.irc.BaseIRCClient = new Class({
       }
     }
     
+    highlightText();
     return true;
   },
   irc_NOTICE: function(prefix, params) {

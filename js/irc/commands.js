@@ -65,7 +65,7 @@ qwebirc.irc.Commands = new Class({
       this.parentObject.pushLastNick(target);
     if(this.send("PRIVMSG " + target + " :" + message))
       this.newQueryLine(target, "MSG", message, {"@": this.parentObject.getNickStatus(target, this.parentObject.nickname)});  
-    streamTextHighlight();
+    highlightText();
   }],
   cmd_NOTICE: [false, 2, 2, function(args) {
     var target = args[0];

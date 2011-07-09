@@ -6,23 +6,31 @@ function qwebirc_ui_onbeforeunload(e) { /* IE sucks */
   return message;
 }
 
-function streamTextHighlight(){
+function highlightText(){
+    isChannel = 0;
+    if(document.getElementById('channel-name-id').innerHTML.search('#') >= 0){
+        isChannel = 1;
+    }
     e = document.getElementsByTagName('div');
     for(i = 0; i < e.length; i++){
       if(e[i].getAttribute('class') == 'linestyle1 colourline' || e[i].getAttribute('class') == 'linestyle2 colourline'){
           if(e[i].childNodes.length == 2){
               target = e[i].childNodes[1].childNodes[1].innerHTML;
-              if(target.search('#') >= 0){
-                  target = target.substr(target.search('#'));
-              }else if(target.search('>') >= 0){
-                  alert(target);
-              }
-              if(target == document.getElementById('channel-name-id').innerHTML){
-                  e[i].style.fontWeight = 'bold';
-                  e[i].style.backgroundColor = 'white';
+              e[i].style.fontWeight = '';
+              e[i].style.backgroundColor = '';
+              if(isChannel){
+                  if(target.search('#') >= 0){
+                      target = target.substr(target.search('#'));
+                      if(target == document.getElementById('channel-name-id').innerHTML){
+                          e[i].style.fontWeight = 'bold';
+                          e[i].style.backgroundColor = 'white';
+                      }
+                  }
               }else{
-                  e[i].style.fontWeight = '';
-                  e[i].style.backgroundColor = '';
+                  if(target.search(document.getElementById('channel-name-id').innerHTML) >= 0){
+                      e[i].style.fontWeight = 'bold';
+                      e[i].style.backgroundColor = 'white';
+                  }
               }
           }
       }

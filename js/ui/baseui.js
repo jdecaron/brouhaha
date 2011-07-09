@@ -342,6 +342,7 @@ qwebirc.ui.StandardUI = new Class({
              }
           }
           document.getElementById('channel-name-id').innerHTML = nick;
+          highlightText();
           //window.client.exec("/WHOIS " + nick);
         }
       }.bind(this)];
