@@ -379,6 +379,27 @@ qwebirc.ui.QUI.Window = new Class({
           window.name = this.name;
           element = document.getElementById('channel-name-id');
           element.innerHTML = this.name;
+
+          e = document.getElementsByTagName('div');
+          for(i in e){
+              if(e[i].getAttribute('class') == 'linestyle1 colourline' || e[i].getAttribute('class') == 'linestyle2 colourline'){
+                  if(e[i].childNodes.length == 2){
+                      target = e[i].childNodes[1].childNodes[1].innerHTML;
+                      if(target.search('#') >= 0){
+                          target = target.substr(target.search('#'));
+                      }else if(target.search('>') >= 0){
+                          alert(target);
+                      }
+                      if(target == document.getElementById('channel-name-id').innerHTML){
+                          e[i].style.fontWeight = 'bold';
+                          e[i].style.backgroundColor = 'white';
+                      }else{
+                          e[i].style.fontWeight = '';
+                          e[i].style.backgroundColor = '';
+                      }
+                  }
+              }
+          }
       }
     }.bind(this));
     this.tab.addEvent("dblclick", function(e) {
