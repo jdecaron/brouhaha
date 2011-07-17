@@ -43,6 +43,7 @@ qwebirc.irc.IRCClient = new Class({
 
     if($defined(user)) {
       extra["h"] = user.hostToHost();
+      extra['n'] = user.hostToNick();
       if($defined(extra["f"]) && extra["f"].length > 0){
           if(extra["f"][0] == '#'){
               if(extra["f"] == '#brouhaha'){
@@ -56,8 +57,6 @@ qwebirc.irc.IRCClient = new Class({
           }else{
               extra['n'] = user.hostToNick() + '>' + this.nickname;
           }
-      }else{
-            extra['n'] = user.hostToNick();
       }
     }
     extra["c"] = channel;

@@ -390,6 +390,7 @@ qwebirc.ui.QUI.Window = new Class({
         return;
         
       parentObject.selectWindow(this);
+      highlightText();
     }.bind(this));
     
     if(type != qwebirc.ui.WINDOW_STATUS && type != qwebirc.ui.WINDOW_CONNECT) {
