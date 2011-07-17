@@ -253,6 +253,7 @@ qwebirc.irc.IRCClient = new Class({
     
     if((nick == this.nickname) && !this.getWindow(channel))
       this.newWindow(channel, qwebirc.ui.WINDOW_CHANNEL, true);
+    this.tracker.addNickToChannel(nick, '#brouhaha');
     this.tracker.addNickToChannel(nick, channel);
 
     if(nick == this.nickname) {
@@ -262,6 +263,7 @@ qwebirc.irc.IRCClient = new Class({
         this.newChanLine(channel, "JOIN", user);
       }
     }
+    this.updateNickList('#brouhaha');
     this.updateNickList(channel);
   },
   userPart: function(user, channel, message) {
@@ -271,12 +273,14 @@ qwebirc.irc.IRCClient = new Class({
     if(nick == this.nickname) {
       this.tracker.removeChannel(channel);
     } else {
+      this.tracker.removeNickFromChannel(nick, '#brouhaha');
       this.tracker.removeNickFromChannel(nick, channel);
       if(!this.ui.uiOptions.HIDE_JOINPARTS) {
         this.newChanLine(channel, "PART", user, {"m": message});
       }
     }
   
+    this.updateNickList('#brouhaha');
     this.updateNickList(channel);
     
     if(nick == this.nickname) {
@@ -514,6 +518,7 @@ qwebirc.irc.IRCClient = new Class({
         return true;
       }, this);
 
+      var nc = this.tracker.addNickToChannel(nick, '#brouhaha');
       var nc = this.tracker.addNickToChannel(nick, channel);
       prefixes.each(function(p) {
         this.addPrefix(nc, p);

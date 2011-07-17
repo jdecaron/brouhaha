@@ -130,7 +130,7 @@ qwebirc.ui.QUI = new Class({
     var hider2 = function(e) {
       element = document.getElementsByTagName('input')[0];
       if(element.className == 'keyboard-input' && e.type == 'keypress'){
-          if(!window.keyboardInputFocus){
+          if(!window.keyboardInputFocus && e.key.length == 1){
               element.value = element.value + e.key;
           }
           element.focus();

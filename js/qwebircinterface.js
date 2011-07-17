@@ -23,13 +23,13 @@ function highlightText(){
                       target = target.substr(target.search('#'));
                       if(target == document.getElementById('channel-name-id').innerHTML){
                           e[i].style.fontWeight = 'bold';
-                          e[i].style.backgroundColor = 'white';
+                          e[i].style.backgroundColor = '#ffff93';
                       }
                   }
               }else{
                   if(target.search(document.getElementById('channel-name-id').innerHTML) >= 0){
                       e[i].style.fontWeight = 'bold';
-                      e[i].style.backgroundColor = 'white';
+                      e[i].style.backgroundColor = '#ffff93';
                   }
               }
           }
