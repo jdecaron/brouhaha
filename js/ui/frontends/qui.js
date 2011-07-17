@@ -153,7 +153,7 @@ qwebirc.ui.QUI = new Class({
     form.addClass("input");
     
     var channelName = new Element("span");
-    channelName.innerHTML = "#brouhaha";
+    channelName.innerHTML = "#";
     channelName.setAttribute("id", "channel-name-id");
     var inputbox = new Element("input");
     form.appendChild(channelName);

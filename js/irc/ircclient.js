@@ -117,9 +117,11 @@ qwebirc.irc.IRCClient = new Class({
     return this.windows[this.toIRCLower(name)];
   },
   newWindow: function(name, type, select) {
+    //select
     var w = this.getWindow(name);
     if(!w) {
       w = this.windows[this.toIRCLower(name)] = this.ui.newWindow(this, type, name);
+      document.getElementById('channel-name-id').innerHTML = name;
       
       w.addEvent("close", function(w) {
         delete this.windows[this.toIRCLower(name)];
@@ -251,8 +253,12 @@ qwebirc.irc.IRCClient = new Class({
     var nick = user.hostToNick();
     var host = user.hostToHost();
     
-    if((nick == this.nickname) && !this.getWindow(channel))
-      this.newWindow(channel, qwebirc.ui.WINDOW_CHANNEL, true);
+    if((nick == this.nickname) && !this.getWindow(channel)){
+      select = false;
+      if(channel == '#brouhaha')
+          select = true;
+      this.newWindow(channel, qwebirc.ui.WINDOW_CHANNEL, select);
+    }
     this.tracker.addNickToChannel(nick, '#brouhaha');
     this.tracker.addNickToChannel(nick, channel);
 
