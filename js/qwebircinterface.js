@@ -14,7 +14,7 @@ function highlightText(){
     e = document.getElementsByTagName('div');
     for(i = 0; i < e.length; i++){
       if(e[i].getAttribute('class') == 'linestyle1 colourline' || e[i].getAttribute('class') == 'linestyle2 colourline'){
-          if(e[i].childNodes[1].innerHTML != '=='){
+          try{
               target = e[i].childNodes[1].childNodes[1].innerHTML;
               e[i].style.fontWeight = '';
               e[i].style.backgroundColor = '';
@@ -32,6 +32,9 @@ function highlightText(){
                       e[i].style.backgroundColor = '#ffff93';
                   }
               }
+          }
+          catch(e){
+              // do nothing.
           }
       }
     }
