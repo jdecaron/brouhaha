@@ -61,8 +61,10 @@ qwebirc.irc.Commands = new Class({
         target = document.getElementById('channel-name-id').innerHTML;
     }
 
-    if(!this.parentObject.isChannel(target))
+    if(!this.parentObject.isChannel(target)){
       this.parentObject.pushLastNick(target);
+      this.parentObject.newWindow(target, qwebirc.ui.WINDOW_MESSAGES, false);
+    }
     if(this.send("PRIVMSG " + target + " :" + message))
       this.newQueryLine(target, "MSG", message, {"@": this.parentObject.getNickStatus(target, this.parentObject.nickname)});  
     highlightText();
