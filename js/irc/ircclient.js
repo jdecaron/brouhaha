@@ -226,6 +226,7 @@ qwebirc.irc.IRCClient = new Class({
   signedOn: function(nickname) {
     this.tracker = new qwebirc.irc.IRCTracker(this);
     this.nickname = nickname;
+    window.nickname = nickname;
     this.newServerLine("SIGNON");
     
     /* we guarantee that +x is sent out before the joins */
@@ -233,8 +234,8 @@ qwebirc.irc.IRCClient = new Class({
       this.exec("/UMODE +x");
       
     if(true) {
-      //this.options.autojoin = '#brouhaha,#tf2.pug.na,#tf2scrim,#esea.tf2,#tf2ringer';
-      this.options.autojoin = '#brouhaha,#bleu,#rouge,#rtac,#iaweb,#rta,#uniselect';
+      this.options.autojoin = '#brouhaha,#tf2.pug.na,#tf2scrim,#esea.tf2,#tf2ringer';
+      //this.options.autojoin = '#brouhaha,#bleu,#rouge,#rtac,#iaweb,#rta,#uniselect';
       if(qwebirc.auth.loggedin() && this.ui.uiOptions.USE_HIDDENHOST) {
         var d = function() {
           if($defined(this.activeTimers.autojoin))
@@ -354,8 +355,10 @@ qwebirc.irc.IRCClient = new Class({
   nickChanged: function(user, newnick) {
     var oldnick = user.hostToNick();
     
-    if(oldnick == this.nickname)
+    if(oldnick == this.nickname){
       this.nickname = newnick;
+      window.nickname = newnick;
+    }
       
     this.tracker.renameNick(oldnick, newnick);
 

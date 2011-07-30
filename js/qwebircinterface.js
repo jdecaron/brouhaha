@@ -25,11 +25,20 @@ function highlightText(){
                           e[i].style.fontWeight = 'bold';
                           e[i].style.backgroundColor = '#ffffbf';
                       }
+                  }else if(target.search(window.nickname)){
+                      e[i].style.backgroundColor = '#ffe1d8';
                   }
               }else{
+                  console.log(target);
                   if(target.search(document.getElementById('channel-name-id').innerHTML) >= 0){
-                      e[i].style.fontWeight = 'bold';
-                      e[i].style.backgroundColor = '#ffffbf';
+                      if(target.search('#') >= 0){
+                          e[i].style.backgroundColor = '#feffbf';
+                      }else{
+                          e[i].style.fontWeight = 'bold';
+                          e[i].style.backgroundColor = '#feff7d';
+                      }
+                  }else if(target.search(window.nickname)){
+                      e[i].style.backgroundColor = '#ffe1d8';
                   }
               }
           }
