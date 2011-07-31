@@ -151,7 +151,7 @@ html {
 }
 
 .channel-name {
-  background-color:#e7efff;
+  background-color:#feffbf;
   border: 1px solid $(tab_border);
   font-size: 0.8em;
   padding: 2px;

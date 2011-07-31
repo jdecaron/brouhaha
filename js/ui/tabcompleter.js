@@ -27,7 +27,7 @@ qwebirc.ui.TabCompleterFactory = new Class({
         obj = qwebirc.ui.QueryTabCompleter;
       } else if(w.client.isChannel(word)) {
         obj = qwebirc.ui.ChannelNameTabCompleter;
-      } else if(ltext.match(/^\/(q|query|msg) /i)) {
+      } else if(false/*ltext.match(/^\/(q|query|msg) /i)*/) {
         obj = qwebirc.ui.QueryTabCompleter;
       } else if(w.type == qwebirc.ui.WINDOW_QUERY) {
         obj = qwebirc.ui.QueryNickTabCompleter;
