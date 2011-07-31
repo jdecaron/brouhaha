@@ -230,7 +230,6 @@ qwebirc.irc.IRCClient = new Class({
   signedOn: function(nickname) {
     this.tracker = new qwebirc.irc.IRCTracker(this);
     this.nickname = nickname;
-    window.nickname = nickname;
     this.newServerLine("SIGNON");
     
     /* we guarantee that +x is sent out before the joins */
@@ -361,7 +360,6 @@ qwebirc.irc.IRCClient = new Class({
     
     if(oldnick == this.nickname){
       this.nickname = newnick;
-      window.nickname = newnick;
     }
       
     this.tracker.renameNick(oldnick, newnick);

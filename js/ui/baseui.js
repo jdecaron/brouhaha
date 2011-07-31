@@ -333,12 +333,10 @@ qwebirc.ui.StandardUI = new Class({
           if(nick.search('#') >= 0){
               nick = nick.substr(0, nick.search('#'));
           }else{
-             if(nick.search('>') >= 0){
-                nick_b = nick;
+             if(nick.search(window.client.nickname + '>') >= 0){
+                nick = nick.substr(nick.search('>') + 1, nick.length);
+             }else{
                 nick = nick.substr(0, nick.search('>'));
-                if(window.client.nickname == nick){
-                    nick = nick_b.substr(nick_b.search('>') + 1, nick.length);
-                }
              }
           }
           document.getElementById('channel-name-id').innerHTML = nick;

@@ -25,7 +25,7 @@ function highlightText(){
                           e[i].style.fontWeight = 'bold';
                           e[i].style.backgroundColor = '#ffffbf';
                       }
-                  }else if(target.search(window.nickname)){
+                  }else if(target.search(window.client.nickname)){
                       e[i].style.backgroundColor = '#ffe1d8';
                   }
               }else{
@@ -36,7 +36,7 @@ function highlightText(){
                           e[i].style.fontWeight = 'bold';
                           e[i].style.backgroundColor = '#feff7d';
                       }
-                  }else if(target.search(window.nickname)){
+                  }else if(target.search(window.client.nickname)){
                       e[i].style.backgroundColor = '#ffe1d8';
                   }
               }
