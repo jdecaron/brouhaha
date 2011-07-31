@@ -55,7 +55,11 @@ qwebirc.irc.IRCClient = new Class({
               }
               extra["n"] = user.hostToNick() + extra["f"];
           }else{
-              extra['n'] = user.hostToNick() + '>' + this.nickname;
+              if(user.hostToNick() == this.nickname){
+                  extra['n'] = this.nickname + '>' + extra['f'];
+              }else{
+                  extra['n'] = user.hostToNick() + '>' + extra['f'];
+              }
           }
       }
     }
