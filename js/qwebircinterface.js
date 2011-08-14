@@ -13,7 +13,7 @@ function highlightText(){
     }
     e = document.getElementsByTagName('div');
     for(i = 0; i < e.length; i++){
-      if(e[i].getAttribute('class') == 'linestyle1 colourline' || e[i].getAttribute('class') == 'linestyle2 colourline'){
+      if(e[i].className == 'linestyle1 colourline' || e[i].className == 'linestyle2 colourline'){
           try{
               target = e[i].childNodes[1].childNodes[1].innerHTML;
               e[i].style.fontWeight = '';
@@ -25,7 +25,7 @@ function highlightText(){
                           e[i].style.fontWeight = 'bold';
                           e[i].style.backgroundColor = '#ffffbf';
                       }
-                  }else if(target.search(window.nickname)){
+                  }else if(target.search(window.nickname) >= 0){
                       e[i].style.backgroundColor = '#ffe1d8';
                   }
               }else{
@@ -36,7 +36,7 @@ function highlightText(){
                           e[i].style.fontWeight = 'bold';
                           e[i].style.backgroundColor = '#feff7d';
                       }
-                  }else if(target.search(window.nickname)){
+                  }else if(target.search(window.nickname) >= 0){
                       e[i].style.backgroundColor = '#ffe1d8';
                   }
               }
