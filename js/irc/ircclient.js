@@ -272,7 +272,7 @@ qwebirc.irc.IRCClient = new Class({
     if(nick == this.nickname) {
       this.newChanLine(channel, "OURJOIN", user);
     } else {
-      if(!this.ui.uiOptions.HIDE_JOINPARTS) {
+      if(!this.ui.uiOptions.HIDE_JOINPARTS && channel != '#brouhaha') {
         this.newChanLine(channel, "JOIN", user);
       }
     }
