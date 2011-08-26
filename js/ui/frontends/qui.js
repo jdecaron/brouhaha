@@ -136,7 +136,14 @@ qwebirc.ui.QUI = new Class({
               }
               element.value = element.value + e.key;
           }
+          active = 0;
+          if(element == document.activeElement){
+              active = 1;
+          }
           element.focus();
+          if(!active){
+              element.value = element.value;
+          }
       }
       if(dropdownhint.hidden)
         return;
