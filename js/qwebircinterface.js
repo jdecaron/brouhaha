@@ -13,8 +13,7 @@ function highlightText(){
     }
     e = document.getElementsByTagName('div');
     for(i = 0; i < e.length; i++){
-      if(e[i].className == 'linestyle1 colourline' || e[i].className == 'linestyle2 colourline'){
-          try{
+      if((e[i].className == 'linestyle1 colourline' || e[i].className == 'linestyle2 colourline') && e[i].childNodes.length == 2){
               target = e[i].childNodes[1].childNodes[1].innerHTML;
               e[i].style.fontWeight = '';
               e[i].style.backgroundColor = '';
@@ -40,10 +39,6 @@ function highlightText(){
                       e[i].style.backgroundColor = '#ffe1d8';
                   }
               }
-          }
-          catch(e){
-              // do nothing.
-          }
       }
     }
 }

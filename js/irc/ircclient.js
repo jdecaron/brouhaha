@@ -45,10 +45,10 @@ qwebirc.irc.IRCClient = new Class({
       extra["h"] = user.hostToHost();
       extra['n'] = user.hostToNick();
       if($defined(extra["f"]) && extra["f"].length > 0){
-          if(extra["f"][0] == '#'){
+          if(extra["f"].charAt(0) == '#'){
               if(extra["f"] == '#brouhaha'){
                   extra['f'] = '';
-                  if(document.getElementById('channel-name-id').innerHTML[0] != '#'){
+                  if(document.getElementById('channel-name-id').innerHTML.charAt(0) != '#'){
                       extra['f'] = '>';
                   }
                   extra["f"] = extra['f'] + window.name;
