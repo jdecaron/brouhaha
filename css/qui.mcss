@@ -44,6 +44,18 @@ html {
   overflow: hidden;
 }
 
+.channel-name {
+  background-color: #FEFFBF;
+  border: 1px solid #C8D1DB;
+  border-radius: 4px 4px 4px 4px;
+  color: #000000;
+  cursor: default;
+  font-size: 0.8em;
+  padding: 2px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
 .qwebirc-qui .dynamicpanel {
   position: absolute;
 }
@@ -88,7 +100,7 @@ html {
 .qwebirc-qui .input input.keyboard-input {
   border: 0px;
   margin: 2px 0px 0px 0px;
-  width: 99%;
+  width: 90%;
 }
 
 .qwebirc-qui .input input.mobile-input {

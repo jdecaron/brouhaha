@@ -44,6 +44,18 @@ html {
   overflow: hidden;
 }
 
+.channel-name {
+  background-color: #FEFFBF;
+  border: 1px solid #C8D1DB;
+  border-radius: 4px 4px 4px 4px;
+  color: #000000;
+  cursor: default;
+  font-size: 0.8em;
+  padding: 2px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
 .qwebirc-qui .dynamicpanel {
   position: absolute;
 }
@@ -145,19 +157,6 @@ html {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   margin-right: -2px;
-  white-space: nowrap;
-  text-decoration: none;
-  color: $(tab_text);
-}
-
-.channel-name {
-  background-color:#feffbf;
-  border: 1px solid $(tab_border);
-  font-size: 0.8em;
-  padding: 2px;
-  cursor: default;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
   white-space: nowrap;
   text-decoration: none;
   color: $(tab_text);
