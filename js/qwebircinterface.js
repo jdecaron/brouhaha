@@ -14,8 +14,7 @@ function highlightText(){
     e = document.getElementsByTagName('div');
     for(i = 0; i < e.length; i++){
       if((e[i].className == 'linestyle1 colourline' || e[i].className == 'linestyle2 colourline') && e[i].childNodes.length == 2){
-              console.log(e[i].childNodes[1].childNodes.length);
-              if(1){
+	      if(e[i].childNodes[1].childNodes.length > 1){
               target = e[i].childNodes[1].childNodes[1].innerHTML;
               e[i].style.fontWeight = '';
               e[i].style.backgroundColor = '';

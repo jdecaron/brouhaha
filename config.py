@@ -32,7 +32,7 @@ REALNAME = "http://moo.com/"
 #          IDENT = IDENT_HEX
 #        - the literal value IDENT_NICKNAME, this will use the users
 #          supplied nickname as their ident.
-IDENT = "webchat"
+IDENT = IDENT_HEX
 
 # OPTION: OUTGOING_IP
 #         The IP address to bind to when connecting to the IRC server.
