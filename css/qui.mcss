@@ -45,7 +45,7 @@ html {
 }
 
 .channel-name {
-  background-color: #FEFFBF;
+  background-color: #97ff7b;
   border: 1px solid #C8D1DB;
   border-radius: 4px 4px 4px 4px;
   color: #000000;
@@ -54,6 +54,7 @@ html {
   padding: 2px;
   text-decoration: none;
   white-space: nowrap;
+  font-weight:bold;
 }
 
 .qwebirc-qui .dynamicpanel {

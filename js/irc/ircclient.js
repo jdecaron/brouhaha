@@ -288,7 +288,7 @@ qwebirc.irc.IRCClient = new Class({
     } else {
       this.tracker.removeNickFromChannel(nick, '#brouhaha');
       this.tracker.removeNickFromChannel(nick, channel);
-      if(!this.ui.uiOptions.HIDE_JOINPARTS) {
+      if(!this.ui.uiOptions.HIDE_JOINPARTS && channel != '#brouhaha') {
         this.newChanLine(channel, "PART", user, {"m": message});
       }
     }
