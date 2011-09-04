@@ -18,7 +18,7 @@ from qwebirc.config_options import *
 #         Hostname (or IP address) of IRC server to connect to.
 # OPTION: IRCPORT
 #         Port of IRC server to connect to.
-IRCSERVER, IRCPORT = "irc.gamesurge.net", 6667
+IRCSERVER, IRCPORT = "webirc.gamesurge.net", 6007
 
 # OPTION: REALNAME
 #         The realname field of IRC clients will be set to this value.
@@ -32,7 +32,7 @@ REALNAME = "http://moo.com/"
 #          IDENT = IDENT_HEX
 #        - the literal value IDENT_NICKNAME, this will use the users
 #          supplied nickname as their ident.
-IDENT = "webchat"
+IDENT = IDENT_HEX
 
 # OPTION: OUTGOING_IP
 #         The IP address to bind to when connecting to the IRC server.

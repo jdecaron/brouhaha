@@ -13,7 +13,8 @@ function highlightText(){
     }
     e = document.getElementsByTagName('div');
     for(i = 0; i < e.length; i++){
-      if((e[i].className == 'linestyle1 colourline' || e[i].className == 'linestyle2 colourline') && e[i].childNodes.length == 2 && e[i].childNodes[1].length > 1){
+      if((e[i].className == 'linestyle1 colourline' || e[i].className == 'linestyle2 colourline') && e[i].childNodes.length == 2){
+	      if(e[i].childNodes[1].childNodes.length > 1){
               target = e[i].childNodes[1].childNodes[1].innerHTML;
               e[i].style.fontWeight = '';
               e[i].style.backgroundColor = '';
@@ -38,7 +39,7 @@ function highlightText(){
                   }else if(target.search(window.nickname) >= 0){
                       e[i].style.backgroundColor = '#ffe1d8';
                   }
-              }
+              }}
       }
     }
 }
