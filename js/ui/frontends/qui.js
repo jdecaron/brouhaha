@@ -129,13 +129,7 @@ qwebirc.ui.QUI = new Class({
     
     var hider2 = function(e) {
       element = document.getElementsByTagName('input')[0];
-      if(element.className == 'keyboard-input' && (e && e.type == 'keyup')){
-          if(!window.keyboardInputFocus && e.key.length == 1){
-              if(typeof element.setSelectionRange == 'function'){
-                  //alert('iii');
-              }
-              element.value = element.value + e.key;
-          }
+      if(element.className == 'keyboard-input' && (e && e.type == 'keydown')){
           active = 0;
           if(element == document.activeElement){
               active = 1;
@@ -154,7 +148,7 @@ qwebirc.ui.QUI = new Class({
     this.hideHint = hider2;
     
     document.addEvent("mousedown", hider2);
-    document.addEvent("keyup", hider2);
+    document.addEvent("keydown", hider2);
   },
   createInput: function() {
     var form = new Element("form");
