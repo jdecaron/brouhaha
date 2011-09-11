@@ -177,6 +177,7 @@ qwebirc.ui.BaseUI = new Class({
     qwebirc.ui.GenericLoginBox(this.parentElement, callback, initialNickname, initialChannels, autoConnect, autoNick, this.options.networkName);
   },
   focusChange: function(newValue) {
+    window.ctrl = 0;
     var window_ = this.getActiveWindow();
     if($defined(window_))
       window_.focusChange(newValue);

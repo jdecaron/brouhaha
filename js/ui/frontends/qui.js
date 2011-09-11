@@ -131,9 +131,9 @@ qwebirc.ui.QUI = new Class({
       element = document.getElementsByTagName('input')[0];
       if(element.className == 'keyboard-input' && (e && e.type == 'keydown')){
           if(e.code == 17){
-              this.ctrl = 1;
+              window.ctrl = 1;
           }
-          if(this.ctrl != 1){
+          if(window.ctrl != 1){
               active = 0;
               if(element == document.activeElement){
                   active = 1;
@@ -154,7 +154,7 @@ qwebirc.ui.QUI = new Class({
     
     var hider3 = function(e) {
         if(e.code == 17){
-            this.ctrl = 0;
+            window.ctrl = 0;
         }
     }.bind(this);
 
