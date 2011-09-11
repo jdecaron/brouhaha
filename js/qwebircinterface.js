@@ -13,9 +13,15 @@ function highlightText(){
     }
     e = document.getElementsByTagName('div');
     for(i = 0; i < e.length; i++){
-      if((e[i].className == 'linestyle1 colourline' || e[i].className == 'linestyle2 colourline') && e[i].childNodes.length == 2){
-	      if(e[i].childNodes[1].childNodes.length > 1){
-              target = e[i].childNodes[1].childNodes[1].innerHTML;
+      if(e[i].className == 'linestyle1 colourline' || e[i].className == 'linestyle2 colourline'){
+          s = e[i].getElementsByTagName('span');
+          target = '';
+          for(j = 0; j < s.length; j++){
+              if(s[j].className == 'hyperlink-whois'){
+                  target = s[j].innerHTML;
+              }
+          }
+	      if(target != 0){
               e[i].style.fontWeight = '';
               e[i].style.backgroundColor = '';
               if(isChannel){
