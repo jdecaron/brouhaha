@@ -4,6 +4,7 @@ static/js/qwebirc.js
 static/{js,css}/debug
 static/css
 static/panes/privacypolicy.html
+static/qui.html
 config.py
 dropin.cache
 *.swp

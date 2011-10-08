@@ -98,6 +98,7 @@ qwebirc.ui.Window = new Class({
   addLine: function(type, line, colour, element) {
     var hilight = qwebirc.ui.HILIGHT_NONE;
     var lhilight = false;
+    var botre = new RegExp("^TF2Messenger");
     
     if(type) {
       hilight = qwebirc.ui.HILIGHT_ACTIVITY;
@@ -112,7 +113,7 @@ qwebirc.ui.Window = new Class({
             this.parentObject.flash();
           }
         }
-        if(!type.match(/^OUR/) && this.client.hilightController.match(line["m"])) {
+        if(!type.match(/^OUR/) && this.client.hilightController.match(line["m"]) && !line["n"].match(botre)) {
           lhilight = true;
           hilight = qwebirc.ui.HILIGHT_US;
           this.parentObject.beep();
