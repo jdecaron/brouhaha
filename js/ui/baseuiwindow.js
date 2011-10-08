@@ -98,7 +98,7 @@ qwebirc.ui.Window = new Class({
   addLine: function(type, line, colour, element) {
     var hilight = qwebirc.ui.HILIGHT_NONE;
     var lhilight = false;
-    var botre = new RegExp("^TF2Messenger");
+    var botre = new RegExp("^TF2");
     
     if(type) {
       hilight = qwebirc.ui.HILIGHT_ACTIVITY;
