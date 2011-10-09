@@ -45,7 +45,7 @@ html {
 }
 
 .channel-name {
-  background-color: #97ff7b;
+  background-color: #e7efff;
   border: 1px solid #C8D1DB;
   border-radius: 4px 4px 4px 4px;
   color: #000000;
@@ -54,7 +54,8 @@ html {
   padding: 2px;
   text-decoration: none;
   white-space: nowrap;
-  font-weight:bold;
+  float:left;
+  margin:1px 0px 0px 1px;
 }
 
 .qwebirc-qui .dynamicpanel {
@@ -126,6 +127,12 @@ html {
   right: 0px;
   background-color: $(topic_background);
   border-bottom: 1px dashed $(topic_border);
+}
+
+.qwebirc-qui .properties {
+  background-color: $(menu_background);
+  border-top : 1px solid $(menu_border);
+  height:25px;
 }
 
 .qwebirc-qui .topic .emptytopic {

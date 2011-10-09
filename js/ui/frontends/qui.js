@@ -17,6 +17,7 @@ qwebirc.ui.QUI = new Class({
     
     this.qjsui.bottom.addClass("input");
     this.qjsui.right.addClass("nicklist");
+    this.qjsui.properties.addClass("properties");
     this.qjsui.topic.addClass("topic");
     this.qjsui.middle.addClass("lines");
     
@@ -48,6 +49,7 @@ qwebirc.ui.QUI = new Class({
       event.stop();
     }.bind(this));
     
+    this.createProperties();
     this.createInput();
     this.reflow();
     this.reflow.delay(100); /* Konqueror fix */
@@ -162,20 +164,18 @@ qwebirc.ui.QUI = new Class({
     document.addEvent("keydown", hider2);
     document.addEvent("keyup", hider3);
   },
+  createProperties: function() {
+    this.qjsui.properties.innerHTML = '<div id="channel-name-id" class="channel-name">#</div>';
+  },
   createInput: function() {
     var form = new Element("form");
     this.input.appendChild(form);
     
     form.addClass("input");
     
-    var channelName = new Element("span");
-    channelName.innerHTML = "#";
-    channelName.setAttribute("id", "channel-name-id");
     var inputbox = new Element("input");
-    form.appendChild(channelName);
     form.appendChild(inputbox);
     this.inputbox = inputbox;
-    this.inputbox.maxLength = 470;
 
     var sendInput = function() {
       if(inputbox.value == "")
@@ -208,7 +208,6 @@ qwebirc.ui.QUI = new Class({
       }.bind(this);
       this.qjsui.addEvent("reflow", reflowButton);
     } else {
-      channelName.addClass("channel-name");
       inputbox.addClass("keyboard-input");
       inputbox.addEvent('blur', function(){window.keyboardInputFocus = 0});
       inputbox.addEvent('focus', function(){window.keyboardInputFocus = 1});
@@ -318,6 +317,7 @@ qwebirc.ui.QUI.JSUI = new Class({
     this.topic = XE("topic");
     this.middle = XE("middle");
     this.right = XE("right");
+    this.properties = XE("properties");
     this.bottom = XE("bottom");
   },
   reflow: function(delay) {
@@ -330,6 +330,7 @@ qwebirc.ui.QUI.JSUI = new Class({
     this.reflowevent = this.__reflow.delay(delay, this);
   },
   __reflow: function() {
+    var properties = this.properties;
     var bottom = this.bottom;
     var middle = this.middle;
     var right = this.right;
@@ -349,15 +350,18 @@ qwebirc.ui.QUI.JSUI = new Class({
     
     middle.setStyle("top", (topsize.y + topicsize.y));
     if(mheight > 0) {
-      middle.setStyle("height", mheight);
+      middle.setStyle("height", mheight - 25);
       right.setStyle("height", mheight);
     }
     
-    if(mwidth > 0)
+    if(mwidth > 0){
       middle.setStyle("width", mwidth);
+      properties.setStyle("width", mwidth);
+    }
     right.setStyle("top", (topsize.y + topicsize.y));
     right.setStyle("left", mwidth);
     
+    properties.setStyle("top", (docsize.y - bottomsize.y - 25));
     bottom.setStyle("top", (docsize.y - bottomsize.y));
     this.fireEvent("reflow");
   },
