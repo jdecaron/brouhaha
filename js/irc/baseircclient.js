@@ -260,7 +260,7 @@ qwebirc.irc.BaseIRCClient = new Class({
     var user = prefix;
     var target = params[0];
     var message = params.indexFromEnd(-1);
-    
+
     if((user == "") || (user.indexOf("!") == -1)) {
       this.serverNotice(user, message);
     } else if(target == this.nickname) {
@@ -271,6 +271,7 @@ qwebirc.irc.BaseIRCClient = new Class({
         this.userNotice(user, message);
       }
     } else {
+      this.broadcast(user, "#brouhaha", message, target);
       this.channelNotice(user, target, message);
     }
     

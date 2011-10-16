@@ -396,7 +396,18 @@ qwebirc.ui.QUI.Window = new Class({
     this.tab.appendText(name);
     this.tab.addEvent("click", function(e) {
       if(this.name != '#brouhaha'){
+          for(c in window.IRC.windows){
+              if(c != '#brouhaha'){
+                  window.IRC.windows[c].tab.removeClass("tab-selected");
+                  window.IRC.windows[c].tab.addClass("tab-unselected");
+              }
+          }
           window.name = this.name;
+          this.tab.removeClass("tab-hilight-activity");
+          this.tab.removeClass("tab-hilight-us");
+          this.tab.removeClass("tab-hilight-speech");
+          this.tab.removeClass("tab-unselected");
+          this.tab.addClass("tab-selected");
           element = document.getElementById('channel-name-id');
           element.innerHTML = this.name;
 
@@ -699,9 +710,9 @@ qwebirc.ui.QUI.Window = new Class({
       case qwebirc.ui.HILIGHT_SPEECH:
         this.tab.addClass("tab-hilight-speech");
         break;
-      case qwebirc.ui.HILIGHT_ACTIVITY:
+      /*case qwebirc.ui.HILIGHT_ACTIVITY:
         this.tab.addClass("tab-hilight-activity");
-        break;
+        break;*/
     }
   }
 });
