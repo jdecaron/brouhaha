@@ -638,6 +638,9 @@ qwebirc.ui.QUI.Window = new Class({
     this.tab.removeClass("tab-unselected");
     if(this.name != '#brouhaha'){
         this.tab.addClass("tab-selected");
+    }else{
+        this.tab.removeClass("brouhaha-unselected");
+        this.tab.addClass("brouhaha");
     }
 
     this.parentObject.setLines(this.lines);
@@ -672,10 +675,16 @@ qwebirc.ui.QUI.Window = new Class({
     }
   },
   deselect: function() {
+    console.log(this.name);
     this.parent();
     
     this.tab.removeClass("tab-selected");
-    this.tab.addClass("tab-unselected");
+    if(this.name == '#brouhaha'){
+        this.tab.removeClass("brouhaha");
+        this.tab.addClass("brouhaha-unselected");
+    }else{
+        this.tab.addClass("tab-unselected");
+    }
   },
   close: function() {
     this.parent();

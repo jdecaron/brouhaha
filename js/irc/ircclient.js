@@ -241,7 +241,7 @@ qwebirc.irc.IRCClient = new Class({
       if(window.location.hash.length > 1){
           this.options.autojoin = '#brouhaha,' + window.location.hash.replace(/&/g, ',#');
       }else{
-          this.options.autojoin = '#brouhaha,#bleu,#rouge,#rtac,#iaweb,#rta,#uniselect';
+          this.options.autojoin = '#brouhaha,#bleu,#novelis,#rtac,#iaweb,#rta,#uniselect';
           //this.options.autojoin = '#brouhaha,#tf2.pug.na,#tf2.ultiduo.na,#tf2scrim,#esea.tf2';
       }
       if(qwebirc.auth.loggedin() && this.ui.uiOptions.USE_HIDDENHOST) {
@@ -273,7 +273,7 @@ qwebirc.irc.IRCClient = new Class({
     this.tracker.addNickToChannel(nick, '#brouhaha');
     this.tracker.addNickToChannel(nick, channel);
 
-    if(nick == this.nickname) {
+    if(nick == this.nickname && channel != '#brouhaha') {
       this.newChanLine(channel, "OURJOIN", user);
     } else {
       if(!this.ui.uiOptions.HIDE_JOINPARTS && channel != '#brouhaha') {

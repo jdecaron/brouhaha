@@ -175,6 +175,11 @@ html {
   width:80px;
 }
 
+.qwebirc-qui .brouhaha-unselected{
+  background-image:url('images/b_background2_unselected.gif');
+  width:80px;
+}
+
 .qwebirc-qui .tab:hover {
   background: $(tab_hover);
   border: 1px solid #c8d2dc;

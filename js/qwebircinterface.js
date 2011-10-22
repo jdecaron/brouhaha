@@ -36,12 +36,10 @@ function highlightText(){
               }else{
                   if(target.search(document.getElementById('channel-name-id').innerHTML) >= 0){
                       if(target.search('#') >= 0){
-                          e[i].style.backgroundColor = '#feffbf';
+                          e[i].style.backgroundColor = '#ffded6';
                       }else{
-                          e[i].style.backgroundColor = '#feff7d';
+                          e[i].style.backgroundColor = '#ffbcaf';
                       }
-                  }else if(target.search(window.nickname) >= 0){
-                      e[i].style.backgroundColor = '#ffbcaf';
                   }
               }}
       }
