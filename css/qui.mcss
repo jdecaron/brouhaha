@@ -172,7 +172,6 @@ html {
 
 .qwebirc-qui .brouhaha{
   background-image:url('images/b_background2.gif');
-  text-indent: -3000px;
   width:80px;
 }
 
