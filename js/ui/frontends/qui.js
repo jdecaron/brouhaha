@@ -393,7 +393,12 @@ qwebirc.ui.QUI.Window = new Class({
     parentObject.tabs.appendChild(this.tab);
     parentObject.tabs.appendChild(this.spaceNode);
     
-    this.tab.appendText(name);
+    if(name == '#brouhaha'){
+        this.tab.addClass("brouhaha");
+        this.tab.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+    }else{
+        this.tab.appendText(name);
+    }
     this.tab.addEvent("click", function(e) {
       if(this.name != '#brouhaha'){
           for(c in window.IRC.windows){
@@ -631,7 +636,9 @@ qwebirc.ui.QUI.Window = new Class({
     var inputVisible = this.type != qwebirc.ui.WINDOW_CONNECT && this.type != qwebirc.ui.WINDOW_CUSTOM;
     
     this.tab.removeClass("tab-unselected");
-    this.tab.addClass("tab-selected");
+    if(this.name != '#brouhaha'){
+        this.tab.addClass("tab-selected");
+    }
 
     this.parentObject.setLines(this.lines);
     this.parentObject.setChannelItems(this.nicklist, this.topic);

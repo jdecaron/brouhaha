@@ -170,6 +170,12 @@ html {
   color: $(tab_text);
 }
 
+.qwebirc-qui .brouhaha{
+  background-image:url('images/b_background2.gif');
+  text-indent: -3000px;
+  width:80px;
+}
+
 .qwebirc-qui .tab:hover {
   background: $(tab_hover);
   border: 1px solid #c8d2dc;
