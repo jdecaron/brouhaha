@@ -675,7 +675,6 @@ qwebirc.ui.QUI.Window = new Class({
     }
   },
   deselect: function() {
-    console.log(this.name);
     this.parent();
     
     this.tab.removeClass("tab-selected");
