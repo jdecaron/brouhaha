@@ -689,18 +689,15 @@ qwebirc.ui.QUI.Window = new Class({
     if(this.name != "Connection details" && this.name != "#brouhaha"){
         channels = Cookie.read("channels");
         if(channels != null){
-            channels = channels.split(":");
+            channels = channels.split(",");
             for(i=channels.length-1;i>=0;i--){
                 if(channels[i].search(this.name + "$") != -1){
                     channels.splice(i, 1);
                 }
             }
-            channels.push("-" + this.name);
-            channels = channels.join(":");
-        }else{
-            channels = ["-" + this.name];
+            channels = channels.join(",");
+            Cookie.write("channels", channels, {duration: 9999});
         }
-        Cookie.write("channels", channels, {duration: 9999});
     }
     this.parent();
     

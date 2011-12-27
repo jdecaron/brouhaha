@@ -190,19 +190,19 @@ qwebirc.irc.BaseIRCClient = new Class({
     return true;
   },
   irc_JOIN: function(prefix, params) {
-    if(params[0] != "Connection details" && this.name != "#brouhaha"){
+    if(params[0] != "Connection details" && params[0] != "#brouhaha"){
         channels = Cookie.read("channels");
-        if(channels != null){
-            channels = channels.split(":");
+        if(channels != null && channels != ""){
+            channels = channels.split(",");
             for(i=channels.length-1;i>=0;i--){
                 if(channels[i].search(params[0] + "$") != -1){
                     channels.splice(i, 1);
                 }
             }
-            channels.push("+" + params[0]);
-            channels = channels.join(":");
+            channels.push(params[0]);
+            channels = channels.join(",");
         }else{
-            channels = ["+" + params[0]];
+            channels = params[0];
         }
         Cookie.write("channels", channels, {duration: 9999});
     }
