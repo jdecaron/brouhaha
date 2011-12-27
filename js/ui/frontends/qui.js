@@ -686,6 +686,25 @@ qwebirc.ui.QUI.Window = new Class({
     }
   },
   close: function() {
+    if(this.name != "Connection details" && this.name != "#brouhaha"){
+        channels = Cookie.read("channels");
+        if(channels != null){
+            channels = channels.split(":");
+            console.log(channels.length);
+            for(i=channels.length-1;i>=0;i--){
+                console.log(channels);
+                if(channels[i].search(this.name) != -1){
+                    channels.splice(i, 1);
+                }
+                console.log(channels);
+            }
+            channels.push("-" + this.name);
+            channels = channels.join(":");
+        }else{
+            channels = ["-" + this.name];
+        }
+        Cookie.write("channels", channels, {duration: 9999});
+    }
     this.parent();
     
     this.parentObject.tabs.removeChild(this.tab);
