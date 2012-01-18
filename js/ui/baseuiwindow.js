@@ -114,8 +114,9 @@ qwebirc.ui.Window = new Class({
             this.parentObject.flash();
           }
         }else if(type.match("NOTICE$") && this.type == qwebirc.ui.WINDOW_CHANNEL){
-            this.parentObject.beep();
             element.style.color = "red";
+            this.parentObject.beep();
+            this.parentObject.flash();
         }
         if(!type.match(/^OUR/) && this.client.hilightController.match(line["m"]) && !line["n"].match(botre)) {
           lhilight = true;
