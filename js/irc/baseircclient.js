@@ -242,7 +242,7 @@ qwebirc.irc.BaseIRCClient = new Class({
     var target = params[0];
     var message = params.indexFromEnd(-1);
 
-    this.broadcast(user, "#brouhaha", message, target);
+    this.broadcast(user, "#brouhaha", message, target, "CHANMSG");
     
     var ctcp = this.processCTCP(message);
     if(ctcp) {
@@ -287,7 +287,7 @@ qwebirc.irc.BaseIRCClient = new Class({
         this.userNotice(user, message);
       }
     } else {
-      this.broadcast(user, "#brouhaha", message, target);
+      this.broadcast(user, "#brouhaha", message, target, "CHANNOTICE");
       this.channelNotice(user, target, message);
     }
     

@@ -104,6 +104,7 @@ qwebirc.ui.Window = new Class({
       hilight = qwebirc.ui.HILIGHT_ACTIVITY;
       
       if(type.match(/(NOTICE|ACTION|MSG)$/)) {
+        console.log(type);
         if(this.type == qwebirc.ui.WINDOW_QUERY || this.type == qwebirc.ui.WINDOW_MESSAGES) {
           if(type.match(/^OUR/) || type.match(/NOTICE$/)) {
             hilight = qwebirc.ui.HILIGHT_ACTIVITY;
@@ -112,6 +113,9 @@ qwebirc.ui.Window = new Class({
             this.parentObject.beep();
             this.parentObject.flash();
           }
+        }else if(type.match("NOTICE$") && this.type == qwebirc.ui.WINDOW_CHANNEL){
+            this.parentObject.beep();
+            element.style.color = "red";
         }
         if(!type.match(/^OUR/) && this.client.hilightController.match(line["m"]) && !line["n"].match(botre)) {
           lhilight = true;

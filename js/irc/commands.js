@@ -59,7 +59,7 @@ qwebirc.irc.Commands = new Class({
     if(window.name != target && target == '#brouhaha'){
         target = document.getElementById('channel-name-id').innerHTML;
     }
-    this.parentObject.broadcast(this.parentObject.nickname, "#brouhaha", message, target);
+    this.parentObject.broadcast(this.parentObject.nickname, "#brouhaha", message, target, "CHANMSG");
 
     if(!this.parentObject.isChannel(target)){
       this.parentObject.pushLastNick(target);
@@ -76,7 +76,7 @@ qwebirc.irc.Commands = new Class({
     if(window.name != target && target == '#brouhaha'){
         target = document.getElementById('channel-name-id').innerHTML;
     }
-    this.parentObject.broadcast(this.parentObject.nickname, "#brouhaha", message, target);
+    this.parentObject.broadcast(this.parentObject.nickname, "#brouhaha", message, target, "CHANNOTICE");
 
     if(this.send("NOTICE " + target + " :" + message)) {
       if(this.parentObject.isChannel(target)) {
