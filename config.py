@@ -18,11 +18,12 @@ from qwebirc.config_options import *
 #         Hostname (or IP address) of IRC server to connect to.
 # OPTION: IRCPORT
 #         Port of IRC server to connect to.
+#IRCSERVER, IRCPORT = "webirc.gamesurge.net", 6007
 IRCSERVER, IRCPORT = "brouhaha", 6667
 
 # OPTION: REALNAME
 #         The realname field of IRC clients will be set to this value.
-REALNAME = "http://moo.com/"
+REALNAME = "http://atf2.org/"
 
 # OPTION: IDENT
 #        ident to use on irc, possible values include:
@@ -85,12 +86,12 @@ WEBIRC_MODE = None
 # OPTION: BASE_URL
 #         URL that this qwebirc instance will be available at, add the
 #         port number if your instance runs on a port other than 80.
-BASE_URL = "http://foo.foo.org/"
+BASE_URL = "http://atf2.org/"
 
 # OPTION: NETWORK_NAME
 #         The name of your IRC network, displayed throughout the
 #         application.
-NETWORK_NAME = "FooNet"
+NETWORK_NAME = "Gamesurge.net"
 
 # OPTION: APP_TITLE
 #         The title of the application in the web browser.
@@ -135,11 +136,11 @@ NICKNAME_MAXIMUM_LENGTH = 15
 #
 # OPTION: FEEDBACK_FROM
 #         E-mail address that feedback will originate from.
-FEEDBACK_FROM = "moo@moo.com"
+FEEDBACK_FROM = "feedback@qwebirc.com"
 
 # OPTION: FEEDBACK_TO:
 #         E-mail address that feedback will be sent to.
-FEEDBACK_TO = "moo@moo.com"
+FEEDBACK_TO = "jdecaron@gmail.com"
 
 # OPTION: FEEDBACK_SMTP_HOST
 #         Hostname/IP address of SMTP server feedback will be sent

@@ -104,25 +104,39 @@ qwebirc.ui.Window = new Class({
       hilight = qwebirc.ui.HILIGHT_ACTIVITY;
       
       if(type.match(/(NOTICE|ACTION|MSG)$/)) {
-        console.log(type);
         if(this.type == qwebirc.ui.WINDOW_QUERY || this.type == qwebirc.ui.WINDOW_MESSAGES) {
           if(type.match(/^OUR/) || type.match(/NOTICE$/)) {
             hilight = qwebirc.ui.HILIGHT_ACTIVITY;
           } else {
             hilight = qwebirc.ui.HILIGHT_US;
             this.parentObject.beep();
-            this.parentObject.flash();
+            window.flasher = this.parentObject;
+            if(!window.hasfocus && line.c != '#brouhaha'){
+                i = document.createElement("img");
+                i.src = 'http://127.0.0.1:50007/' + Math.random();
+                i.onerror = function(){window.flasher.flash();}
+            }
           }
         }else if(type.match("NOTICE$") && this.type == qwebirc.ui.WINDOW_CHANNEL){
             element.style.color = "red";
+            window.flasher = this.parentObject;
+            if(!window.hasfocus && line.c != '#brouhaha'){
+                i = document.createElement("img");
+                i.src = 'http://127.0.0.1:50007/' + Math.random();
+                i.onerror = function(){window.flasher.flash();}
+            }
             this.parentObject.beep();
-            this.parentObject.flash();
         }
         if(!type.match(/^OUR/) && this.client.hilightController.match(line["m"]) && !line["n"].match(botre)) {
           lhilight = true;
           hilight = qwebirc.ui.HILIGHT_US;
           this.parentObject.beep();
-          this.parentObject.flash();
+          window.flasher = this.parentObject;
+          if(!window.hasfocus && line.c != '#brouhaha'){
+              i = document.createElement("img");
+              i.src = 'http://127.0.0.1:50007/' + Math.random();
+              i.onerror = function(){window.flasher.flash();}
+          }
         } else if(hilight != qwebirc.ui.HILIGHT_US) {
           hilight = qwebirc.ui.HILIGHT_SPEECH;
         }

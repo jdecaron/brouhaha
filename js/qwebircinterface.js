@@ -67,6 +67,14 @@ qwebirc.ui.Interface = new Class({
     staticBaseURL: "/"
   },
   initialize: function(element, ui, options) {
+    window.hasfocus = 1;
+    window.onfocus = function(){
+           this.hasfocus = 1;
+    }
+    window.onblur = function(){
+           this.hasfocus = 0;
+    }
+
     this.setOptions(options);
     
     /* HACK */
