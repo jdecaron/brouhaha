@@ -67,6 +67,7 @@ qwebirc.ui.Interface = new Class({
     staticBaseURL: "/"
   },
   initialize: function(element, ui, options) {
+    window.lastkick = {channel:'', last:1}
     window.hasfocus = 1;
     window.onfocus = function(){
            this.hasfocus = 1;

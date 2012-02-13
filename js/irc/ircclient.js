@@ -287,6 +287,11 @@ qwebirc.irc.IRCClient = new Class({
     }
     this.updateNickList('#brouhaha');
     this.updateNickList(channel);
+
+    if(channel == "#brouhaha"){
+        this.getActiveWindow().infoMessage("Hint #1! When you close a channel this one will be deleted from your favorites and won't come back on the next connection");
+        this.getActiveWindow().infoMessage("Hint #2! To join a new channel type this command in the chat box: /j #channel");
+    }
   },
   userPart: function(user, channel, message) {
     var nick = user.hostToNick();
@@ -313,8 +318,11 @@ qwebirc.irc.IRCClient = new Class({
   },
   userKicked: function(kicker, channel, kickee, message) {
     if(kickee == this.nickname) {
+      window.lastkick.last = new Date().getTime();
       this.tracker.removeChannel(channel);
       this.getWindow(channel).close();
+      this.newChanLine(channel, "KICK", kicker, {"v": kickee, "m": message});
+      this.getActiveWindow().infoMessage(kickee + " was kicked from " + channel + " by " + kicker + "[" + message + "]");
     } else {
       this.tracker.removeNickFromChannel(kickee, channel);
       this.updateNickList(channel);

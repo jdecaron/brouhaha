@@ -686,7 +686,7 @@ qwebirc.ui.QUI.Window = new Class({
     }
   },
   close: function() {
-    if(this.name != "Connection details" && this.name != "#brouhaha"){
+    if(this.name != "Connection details" && this.name != "#brouhaha" && new Date().getTime() - window.lastkick.last > 100){
         channels = Cookie.read("channels");
         if(channels != null){
             channels = channels.split(",");
