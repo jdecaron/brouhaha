@@ -288,8 +288,8 @@ qwebirc.irc.IRCClient = new Class({
     this.updateNickList('#brouhaha');
     this.updateNickList(channel);
 
-    if(channel == "#brouhaha"){
-        this.getActiveWindow().infoMessage("Hint #1! When you close a channel this one will be deleted from your favorites and won't come back on the next connection");
+    if(channel == "#brouhaha" && nick == this.nickname){
+        this.getActiveWindow().infoMessage("Hint #1! When you close a channel this one will be deleted from your favorites and won't come back on the next connection.");
         this.getActiveWindow().infoMessage("Hint #2! To join a new channel type this command in the chat box: /j #channel");
     }
   },
