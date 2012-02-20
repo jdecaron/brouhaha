@@ -173,12 +173,12 @@ html {
 }
 
 .qwebirc-qui .brouhaha{
-  background-image:url('images/b_background2.gif');
+  background-image:url('images/b_background3.gif');
   width:80px;
 }
 
 .qwebirc-qui .brouhaha-unselected{
-  background-image:url('images/b_background2_unselected.gif');
+  background-image:url('images/b_background3_unselected.gif');
   width:80px;
 }
 
