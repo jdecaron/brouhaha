@@ -45,7 +45,7 @@ html {
 }
 
 .channel-name {
-  background-color: #fff;
+  background-color: rgb(255, 255, 191);
   border: 1px solid #C8D1DB;
   border-radius: 4px 4px 4px 4px;
   color: #000000;
@@ -56,6 +56,7 @@ html {
   white-space: nowrap;
   float:left;
   margin:1px 0px 0px 1px;
+  font-weight:bold;
 }
 
 .qwebirc-qui .dynamicpanel {
@@ -168,6 +169,7 @@ html {
   white-space: nowrap;
   text-decoration: none;
   color: $(tab_text);
+  font-weight:bold;
 }
 
 .qwebirc-qui .brouhaha{

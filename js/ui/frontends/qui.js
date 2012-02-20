@@ -458,7 +458,8 @@ qwebirc.ui.QUI.Window = new Class({
           close(e);
       }.bind(this));
       
-      this.tab.appendChild(tabclose);
+      if(name != '#brouhaha')
+          this.tab.appendChild(tabclose);
     }
 
     this.lines = new Element("div");
