@@ -441,11 +441,11 @@ qwebirc.irc.IRCClient = new Class({
       
     return n.prefixes.charAt(0);
   },
-  broadcast: function(user, channel, message, from) {
+  broadcast: function(user, channel, message, from, msgtype) {
     var nick = user.hostToNick();
     
     this.tracker.updateLastSpoke(nick, channel, new Date().getTime()); 
-    this.newChanLine(channel, "CHANMSG", user, {"m": message, "@": this.getNickStatus(channel, nick), "f":from});
+    this.newChanLine(channel, msgtype, user, {"m": message, "@": this.getNickStatus(channel, nick), "f":from});
   },
   channelPrivmsg: function(user, channel, message) {
     var nick = user.hostToNick();

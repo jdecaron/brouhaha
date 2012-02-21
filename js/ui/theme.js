@@ -98,6 +98,8 @@ qwebirc.ui.Theme = new Class({
     this.__ccmaph["{"] = this.__ccmaph["}"] = "";
   },
   __dollarSubstitute: function(x, h, mapper) {
+    if(x == '-${$($N$)$}:$c- $m' && h['c'] == '#brouhaha')
+        x = '-${$($N$)$}- $m'
     var msg = [];
 
     var n = x.split("");
