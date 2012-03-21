@@ -60,6 +60,7 @@ qwebirc.irc.Commands = new Class({
         target = document.getElementById('channel-name-id').innerHTML;
     }
     this.parentObject.broadcast(this.parentObject.nickname, "#brouhaha", message, target, "CHANMSG");
+    document.getElementById('channel-name-id').innerHTML = target;
 
     if(!this.parentObject.isChannel(target)){
       this.parentObject.pushLastNick(target);
@@ -77,6 +78,7 @@ qwebirc.irc.Commands = new Class({
         target = document.getElementById('channel-name-id').innerHTML;
     }
     this.parentObject.broadcast(this.parentObject.nickname, "#brouhaha", message, target, "CHANNOTICE");
+    document.getElementById('channel-name-id').innerHTML = target;
 
     if(this.send("NOTICE " + target + " :" + message)) {
       if(this.parentObject.isChannel(target)) {
