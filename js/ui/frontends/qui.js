@@ -395,7 +395,7 @@ qwebirc.ui.QUI.Window = new Class({
     
     if(name == '#brouhaha'){
         this.tab.addClass("brouhaha");
-        this.tab.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        this.tab.innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     }else{
         this.tab.appendText(name);
     }
@@ -458,7 +458,8 @@ qwebirc.ui.QUI.Window = new Class({
           close(e);
       }.bind(this));
       
-      this.tab.appendChild(tabclose);
+      if(name != '#brouhaha')
+          this.tab.appendChild(tabclose);
     }
 
     this.lines = new Element("div");
