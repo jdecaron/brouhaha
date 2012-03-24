@@ -4,12 +4,12 @@ qwebirc.ui.urlificate = function(element, text, execfn, cmdfn, window) {
   
   var txtprocess = function(text, regex, appendfn, matchfn) {
     for(;;) {
-      var index = text.search(regex);
+      var index = text.toLowerCase().search(regex);
       if(index == -1) {
        appendfn(text);
        break;
       }
-      var match = text.match(regex);
+      var match = text.toLowerCase().match(regex);
       
       var before = text.substring(0, index);
       var matched = match[0];
@@ -86,6 +86,13 @@ qwebirc.ui.urlificate = function(element, text, execfn, cmdfn, window) {
     } else {
       if(url.match(/^www\./))
         url = "http://" + url;
+      else if(url.match(/^connect/)){
+          u = url.split(';');
+          server = u[0].split(' ')[1];
+          password = u[1].split(' ');
+          password = password[password.length - 1];
+          url = 'steam://connect/' + server + '/' + password
+      }
     }
     
     var a = new Element(elementType);
@@ -108,7 +115,7 @@ qwebirc.ui.urlificate = function(element, text, execfn, cmdfn, window) {
     return punct;
   };
 
-  txtprocess(text, /\b((https?|ftp|qwebirc):\/\/|www\.)[^ ]+/, function(text) {
+  txtprocess(text, /\b((https?|ftp|qwebirc):\/\/|www\.)[^ ]+|connect \b.*;.*password [a-zA-Z0-9_]*/, function(text) {
     txtprocess(text, /\B#[^ ,]+/, appendText, appendChan);
   }, appendURL);
   
