@@ -246,7 +246,7 @@ qwebirc.irc.IRCClient = new Class({
               this.options.autojoin = '#brouhaha,' + channels;
           }else{
               //this.options.autojoin = '#brouhaha,#bleu,#novelis,#rtac,#iaweb,#rta,#uniselect';
-              this.options.autojoin = '#brouhaha,#tf2.pug.na,#tf2.ultiduo.na,#tf2scrim,#esea.tf2';
+              this.options.autojoin = '#brouhaha,#lanfest,#tf2';
           }
       }
       if(qwebirc.auth.loggedin() && this.ui.uiOptions.USE_HIDDENHOST) {
