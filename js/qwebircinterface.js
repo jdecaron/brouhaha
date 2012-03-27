@@ -1,9 +1,11 @@
 function qwebirc_ui_onbeforeunload(e) { /* IE sucks */
-  var message = "This action will close all active IRC connections.";
-  var e = e || window.event;
-  if(e)
-    e.returnValue = message;
-  return message;
+  if(new Date().getTime() - document.window.steamlink > 100){
+      var message = "This action will close all active IRC connections.";
+      var e = e || window.event;
+      if(e)
+        e.returnValue = message;
+      return message;
+  }
 }
 
 function highlightText(){
@@ -67,6 +69,7 @@ qwebirc.ui.Interface = new Class({
     staticBaseURL: "/"
   },
   initialize: function(element, ui, options) {
+    document.window.steamlink = 0;
     window.lastkick = {channel:'', last:1}
     window.hasfocus = 1;
     window.onfocus = function(){

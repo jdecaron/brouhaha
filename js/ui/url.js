@@ -87,6 +87,7 @@ qwebirc.ui.urlificate = function(element, text, execfn, cmdfn, window) {
       if(url.match(/^www\./))
         url = "http://" + url;
       else if(url.match(/^connect/)){
+          target = null;
           u = url.split(';');
           server = u[0].split(' ')[1];
           password = u[1].split(' ');
@@ -101,9 +102,11 @@ qwebirc.ui.urlificate = function(element, text, execfn, cmdfn, window) {
       
     if(url) {
       a.href = url;
+      a.onclick = function(){document.window.steamlink = new Date().getTime();}
     
-      if(target)
+      if(target){
         a.target = target;
+      }
     }
     addedText.push(disptext);
     a.appendChild(document.createTextNode(disptext));
