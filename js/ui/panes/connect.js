@@ -170,7 +170,7 @@ qwebirc.ui.LoginBox = function(parentElement, callback, initialNickname, initial
   tbody.appendChild(r);
   var d1 = new Element("td");
   d1.colSpan = "2";
-  d1.innerHTML = '<input type="checkbox" onmousedown="this.parentNode.parentNode.parentNode.innerHTML = \'<tr><td>Nickname:</td><td><input id=nickname value=' + nickname + ' ></td></tr><tr><td>Gamesurge account:</td><td><input id=gamesurge value=' + gamesurge + ' ></td></tr><tr><td>Password:</td><td><input type=password id=password value=' + password + ' ></td></tr><tr><td><td><input type=checkbox checked id=save > Save information</td></tr><tr><td></td><td><input type=submit value=Connect /></td></tr>\'"/>Auth options (optional)';
+  d1.innerHTML = '<input type="checkbox" onmousedown="window.nickname = document.getElementById(' + '\'nickname\'' + ').value;this.parentNode.parentNode.parentNode.innerHTML = \'<tr><td>Nickname:</td><td><input id=nickname  ></td></tr><tr><td>Gamesurge account:</td><td><input id=gamesurge value=' + gamesurge + ' ></td></tr><tr><td>Password:</td><td><input type=password id=password value=' + password + ' ></td></tr><tr><td><td><input type=checkbox checked id=save > Save information</td></tr><tr><td></td><td><input type=submit value=Connect /></td></tr>\';document.getElementById(' + '\'nickname\'' + ').value = window.nickname;"/>Auth options (optional)';
   r.appendChild(d1);
   
   var chanStyle = null;
@@ -238,7 +238,8 @@ qwebirc.ui.LoginBox = function(parentElement, callback, initialNickname, initial
       return;
     }
     
-    var data = {"nickname": nickname, "autojoin": chans};
+    var data = {"nickname": nickname, "autojoin": chans, "gamesurge":Cookie.read("gamesurge"), "password":Cookie.read("password")};
+    console.log(data);
     if(qwebirc.auth.enabled()) {
       if(qwebirc.auth.passAuth() && authCheckBox.checked) {
           if(!usernameBox.value || !passwordBox.value) {

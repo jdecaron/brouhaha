@@ -4,12 +4,12 @@ qwebirc.ui.urlificate = function(element, text, execfn, cmdfn, window) {
   
   var txtprocess = function(text, regex, appendfn, matchfn) {
     for(;;) {
-      var index = text.toLowerCase().search(regex);
+      var index = text.search(regex);
       if(index == -1) {
        appendfn(text);
        break;
       }
-      var match = text.toLowerCase().match(regex);
+      var match = text.match(regex);
       
       var before = text.substring(0, index);
       var matched = match[0];
@@ -118,7 +118,7 @@ qwebirc.ui.urlificate = function(element, text, execfn, cmdfn, window) {
     return punct;
   };
 
-  txtprocess(text, /\b((https?|ftp|qwebirc):\/\/|www\.)[^ ]+|connect \b.*;.*password [a-zA-Z0-9_]*/, function(text) {
+  txtprocess(text, /\b((https?|ftp|qwebirc):\/\/|www\.)[^ ]+|connect [a-zA-Z0-9_]*\..*[a-zA-Z0-9_]*.*;.*password [a-zA-Z0-9_]*/i, function(text) {
     txtprocess(text, /\B#[^ ,]+/, appendText, appendChan);
   }, appendURL);
   

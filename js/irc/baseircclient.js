@@ -20,6 +20,7 @@ qwebirc.irc.BaseIRCClient = new Class({
     nickname: "qwebirc"
   },
   initialize: function(options) {
+    console.log(options);
     this.setOptions(options);
 
     this.toIRCLower = qwebirc.irc.RFC1459toIRCLower;
@@ -33,8 +34,10 @@ qwebirc.irc.BaseIRCClient = new Class({
     this.nextctcp = 0;    
 
     this.connection = new qwebirc.irc.IRCConnection({
+      gamesurge: this.options.gamesurge,
       initialNickname: this.nickname,
       onRecv: this.dispatch.bind(this),
+      password: this.options.password,
       serverPassword: this.options.serverPassword
     });
   

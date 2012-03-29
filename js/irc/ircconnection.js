@@ -11,8 +11,10 @@ qwebirc.irc.IRCConnection = new Class({
     floodInterval: 200,
     floodMax: 10,
     floodReset: 5000,
+    gamesurge:'',
     errorAlert: true,
     maxRetries: 5,
+    password:'',
     serverPassword: null
   },
   initialize: function(options) {
@@ -268,7 +270,7 @@ qwebirc.irc.IRCConnection = new Class({
       postdata+="&password=" + encodeURIComponent(this.options.serverPassword);
       
     r.send(postdata);
-    r_0.send("PRIVMSG #tf2 :dude1111");
+    r_0.send("authserv AUTH " + this.options.gamesurge + " " + this.options.password);
   },
   __cancelRequests: function() {
     if($defined(this.__lastActiveRequest)) {
