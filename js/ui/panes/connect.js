@@ -239,7 +239,6 @@ qwebirc.ui.LoginBox = function(parentElement, callback, initialNickname, initial
     }
     
     var data = {"nickname": nickname, "autojoin": chans, "gamesurge":Cookie.read("gamesurge"), "password":Cookie.read("password")};
-    console.log(data);
     if(qwebirc.auth.enabled()) {
       if(qwebirc.auth.passAuth() && authCheckBox.checked) {
           if(!usernameBox.value || !passwordBox.value) {

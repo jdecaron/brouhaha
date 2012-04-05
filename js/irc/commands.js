@@ -55,6 +55,10 @@ qwebirc.irc.Commands = new Class({
   cmd_PRIVMSG: [false, 2, 2, function(args) {
     var target = args[0];
     var message = args[1];
+
+    if(target.toLowerCase() == "authserv" && message.match(/authcookie/i)){
+       this.getActiveWindow().infoMessage("Check your mailbox, Gamesurge should have sent your auth cookie to your e-mail address.");
+    }
     
     if(window.name != target && target == '#brouhaha'){
         target = document.getElementById('channel-name-id').innerHTML;

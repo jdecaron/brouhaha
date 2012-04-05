@@ -248,7 +248,6 @@ qwebirc.irc.IRCConnection = new Class({
     this.cacheAvoidance = qwebirc.util.randHexString(16);
     
     var r = this.newRequest("n");
-    var r_0 = this.newRequest("n");
     r.addEvent("complete", function(o) {
       if(!o) {
         this.disconnected = true;
@@ -270,7 +269,6 @@ qwebirc.irc.IRCConnection = new Class({
       postdata+="&password=" + encodeURIComponent(this.options.serverPassword);
       
     r.send(postdata);
-    r_0.send("authserv AUTH " + this.options.gamesurge + " " + this.options.password);
   },
   __cancelRequests: function() {
     if($defined(this.__lastActiveRequest)) {
