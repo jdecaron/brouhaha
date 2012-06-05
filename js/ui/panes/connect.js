@@ -153,7 +153,25 @@ qwebirc.ui.LoginBox = function(parentElement, callback, initialNickname, initial
   }
 
   var nick = new Element("input");
+  var nickname = '';
+  var gamesurge = '';
+  var password = '';
+  if(Cookie.read("nickname") != null)
+      nickname = Cookie.read("nickname");
+  if(Cookie.read("gamesurge") != null)
+      gamesurge = Cookie.read("gamesurge");
+  if(Cookie.read("password") != null)
+      password = Cookie.read("password");
+  nick.id = 'nickname';
   createRow("Nickname:", nick);
+
+  // Create auth box.
+  var r = new Element("tr");
+  tbody.appendChild(r);
+  var d1 = new Element("td");
+  d1.colSpan = "2";
+  d1.innerHTML = '<input type="checkbox" onmousedown="window.nickname = document.getElementById(' + '\'nickname\'' + ').value;this.parentNode.parentNode.parentNode.innerHTML = \'<tr><td>Nickname:</td><td><input id=nickname  ></td></tr><tr><td>Gamesurge account:</td><td><input id=gamesurge value=' + gamesurge + ' ></td></tr><tr><td>Password:</td><td><input type=password id=password value=' + password + ' ></td></tr><tr><td><td><input type=checkbox checked id=save > Save information</td></tr><tr><td></td><td><input type=submit value=Connect /></td></tr>\';document.getElementById(' + '\'nickname\'' + ').value = window.nickname;"/>Auth options (optional)';
+  r.appendChild(d1);
   
   var chanStyle = null;
   if(qwebirc.auth.enabled() && qwebirc.auth.bouncerAuth())
@@ -192,7 +210,17 @@ qwebirc.ui.LoginBox = function(parentElement, callback, initialNickname, initial
 
   form.addEvent("submit", function(e) {
     new Event(e).stop();
-    var nickname = nick.value;
+    var nickname = document.getElementById('nickname').value;
+    Cookie.write("nickname", nickname, {duration: 9999});
+    if(document.getElementById('save') != null){
+        if(document.getElementById('save').checked == true){
+            Cookie.write("gamesurge", document.getElementById('gamesurge').value, {duration: 9999});
+            Cookie.write("password", document.getElementById('password').value, {duration: 9999});
+        }else{
+            Cookie.write("gamesurge", '', {duration: 9999});
+            Cookie.write("password", '', {duration: 9999});
+        }
+    }
     var chans = chan.value;
     if(chans == "#") /* sorry channel "#" :P */
       chans = "";
@@ -210,7 +238,7 @@ qwebirc.ui.LoginBox = function(parentElement, callback, initialNickname, initial
       return;
     }
     
-    var data = {"nickname": nickname, "autojoin": chans};
+    var data = {"nickname": nickname, "autojoin": chans, "gamesurge":Cookie.read("gamesurge"), "password":Cookie.read("password")};
     if(qwebirc.auth.enabled()) {
       if(qwebirc.auth.passAuth() && authCheckBox.checked) {
           if(!usernameBox.value || !passwordBox.value) {
@@ -242,6 +270,7 @@ qwebirc.ui.LoginBox = function(parentElement, callback, initialNickname, initial
   nick.set("value", initialNickname);
   chan.set("value", initialChannels);
 
+  nick.value = nickname;
   if(window == window.top)
     nick.focus();
 }

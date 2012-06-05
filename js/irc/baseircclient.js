@@ -33,8 +33,10 @@ qwebirc.irc.BaseIRCClient = new Class({
     this.nextctcp = 0;    
 
     this.connection = new qwebirc.irc.IRCConnection({
+      gamesurge: this.options.gamesurge,
       initialNickname: this.nickname,
       onRecv: this.dispatch.bind(this),
+      password: this.options.password,
       serverPassword: this.options.serverPassword
     });
   
@@ -110,6 +112,7 @@ qwebirc.irc.BaseIRCClient = new Class({
     this.lowerNickname = this.toIRCLower(this.nickname);
     this.__signedOn = true;
     this.signedOn(this.nickname);
+    this.send("authserv AUTH " + this.options.gamesurge + " " + this.options.password);
   },
   irc_ERR_NICKNAMEINUSE: function(prefix, params) {
     this.genericError(params[1], params.indexFromEnd(-1).replace("in use.", "in use"));

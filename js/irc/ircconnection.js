@@ -11,8 +11,10 @@ qwebirc.irc.IRCConnection = new Class({
     floodInterval: 200,
     floodMax: 10,
     floodReset: 5000,
+    gamesurge:'',
     errorAlert: true,
     maxRetries: 5,
+    password:'',
     serverPassword: null
   },
   initialize: function(options) {

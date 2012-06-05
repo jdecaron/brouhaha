@@ -239,15 +239,17 @@ qwebirc.irc.IRCClient = new Class({
       
     if(true) {
       if(window.location.hash.length > 1){
-          this.options.autojoin = '#brouhaha,' + window.location.hash.replace(/&/g, ',#');
+          this.options.autojoin = window.location.hash.replace(/&/g, ',#');
       }else{
           channels = Cookie.read("channels");
           if(channels != null && channels != ''){
-              this.options.autojoin = '#brouhaha,' + channels;
+              this.options.autojoin = channels;
           }else{
-              this.options.autojoin = '#brouhaha,#tf2.pug.na,#tf2.ultiduo.na,#tf2scrim,#esea.tf2';
+              this.options.autojoin = '#tf2.pug.na,#tf2.pug.nahl,#tf2.ultiduo.na,#tf2scrim,#esea.tf2';
           }
       }
+      // Sort the autojoin channels.
+      this.options.autojoin = "#brouhaha," + this.options.autojoin.split(",").sort().join(",");
       if(qwebirc.auth.loggedin() && this.ui.uiOptions.USE_HIDDENHOST) {
         var d = function() {
           if($defined(this.activeTimers.autojoin))
