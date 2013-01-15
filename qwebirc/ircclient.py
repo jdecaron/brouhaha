@@ -32,6 +32,7 @@ def irc_decode(x):
     return x.decode("iso-8859-1", "ignore")
 
 class QWebIRCClient(basic.LineReceiver):
+  connections = 0
   delimiter = "\n"
   def __init__(self, *args, **kwargs):
     self.__nickname = "(unregistered)"
@@ -72,6 +73,8 @@ class QWebIRCClient(basic.LineReceiver):
     self.transport.write("%s\r\n" % irc.lowQuote(data.encode("utf-8")))
       
   def connectionMade(self):
+    QWebIRCClient.connections = QWebIRCClient.connections + 1
+    print "++++++++++++++++++++++++++++++++++++: " + str(QWebIRCClient.connections)
     basic.LineReceiver.connectionMade(self)
     
     self.lastError = None
@@ -123,6 +126,7 @@ class QWebIRCClient(basic.LineReceiver):
     self.transport.loseConnection()
 
   def disconnect(self, reason):
+    QWebIRCClient.connections = QWebIRCClient.connections - 1
     self("disconnect", reason)
     self.factory.publisher.disconnect()
     

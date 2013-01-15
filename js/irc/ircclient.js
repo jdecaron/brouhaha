@@ -245,7 +245,7 @@ qwebirc.irc.IRCClient = new Class({
           if(channels != null && channels != ''){
               this.options.autojoin = channels;
           }else{
-              this.options.autojoin = '#tf2.pug.na,#tf2.pug.nahl,#tf2.ultiduo.na,#tf2scrim,#esea.tf2';
+              this.options.autojoin = '#tf2mix,#tf2.pug.na,#tf2.pug.nahl,#tf2.ultiduo.na,#tf2scrim,#esea.tf2';
           }
       }
       // Sort the autojoin channels.

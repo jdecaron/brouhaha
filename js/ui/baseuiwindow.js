@@ -184,7 +184,10 @@ qwebirc.ui.Window = new Class({
     if(prevbottom < prevheight)
       prevbottom = prevheight;
       
-    return prev.y + prevheight == prevbottom;
+    if(Math.abs((prev.y + prevheight) - prevbottom) <= 1)
+      return true;
+    else
+      return false;
   },
   getScrollParent: function() {
     var scrollparent = this.lines;
