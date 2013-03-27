@@ -21,6 +21,7 @@ function highlightText(){
           for(j = 0; j < s.length; j++){
               if(s[j].className == 'hyperlink-whois'){
                   target = s[j].innerHTML;
+                  j = s.length; // Exit from the for loop.
               }
           }
 	      if(target != 0){
