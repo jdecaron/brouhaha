@@ -13,9 +13,12 @@ function highlightText(){
     if(document.getElementById('channel-name-id').innerHTML.search('#') >= 0){
         isChannel = 1;
     }
-    e = document.getElementsByTagName('div');
+    e = document.getElementById('mainircwindow').childNodes;
+    invisibleMessagesFromTarget = [];
+    last5 = '';
+    messagesFromTarget = '';
+    visibleMessagesFromTarget = 0;
     for(i = 0; i < e.length; i++){
-      if(e[i].className == 'linestyle1 colourline' || e[i].className == 'linestyle2 colourline'){
           s = e[i].getElementsByTagName('span');
           target = '';
           for(j = 0; j < s.length; j++){
@@ -32,6 +35,11 @@ function highlightText(){
                       target = target.substr(target.search('#'));
                       if(target == document.getElementById('channel-name-id').innerHTML){
                           e[i].style.backgroundColor = '#ffffbf';
+                          if(e[i].offsetTop >= document.getElementById('mainircwindow').scrollTop && e[i].offsetTop <= document.getElementById('mainircwindow').offsetHeight + document.getElementById('mainircwindow').scrollTop){
+                              visibleMessagesFromTarget++;
+                          }else{
+                              invisibleMessagesFromTarget[invisibleMessagesFromTarget.length] = e[i].outerHTML;
+                          }
                       }
                   }else if(target.search(window.nickname) >= 0){
                       e[i].style.backgroundColor = '#ffbcaf';
@@ -42,10 +50,35 @@ function highlightText(){
                           e[i].style.backgroundColor = '#ffded6';
                       }else{
                           e[i].style.backgroundColor = '#ffbcaf';
+                          if(e[i].offsetTop >= document.getElementById('mainircwindow').scrollTop && e[i].offsetTop <= document.getElementById('mainircwindow').offsetHeight + document.getElementById('mainircwindow').scrollTop){
+                              visibleMessagesFromTarget++;
+                          }else{
+                              invisibleMessagesFromTarget[invisibleMessagesFromTarget.length] = e[i].outerHTML;
+                          }
                       }
                   }
-              }}
-      }
+              }
+          }
+    }
+
+    if(document.getElementById('last5messages')){
+        toDelete = document.getElementById('last5messages');
+        toDelete.parentNode.removeChild(toDelete);
+    }
+    if(document.window.selectedChannel == '#brouhaha' && visibleMessagesFromTarget < 5 && invisibleMessagesFromTarget.length > 0){
+        last5 = new Element("div");
+        main_parent = document.getElementById('mainircwindow');
+        main_parent = main_parent.parentNode;
+        main_parent.insertBefore(last5, document.getElementById('mainircwindow'));
+        messagesFromTarget = '';
+        i = 0;
+        if(5 - visibleMessagesFromTarget < invisibleMessagesFromTarget.length)
+            i = invisibleMessagesFromTarget.length - (5 - visibleMessagesFromTarget)
+        for(; i < invisibleMessagesFromTarget.length; i++){
+            messagesFromTarget += invisibleMessagesFromTarget[i];
+        }
+        last5.innerHTML = messagesFromTarget;
+        last5.id = 'last5messages';
     }
 }
 
@@ -71,6 +104,7 @@ qwebirc.ui.Interface = new Class({
   },
   initialize: function(element, ui, options) {
     document.window.steamlink = 0;
+    document.window.selectedChannel = '';
     window.lastkick = {channel:'', last:1}
     window.hasfocus = 1;
     window.onfocus = function(){

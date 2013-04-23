@@ -348,9 +348,22 @@ qwebirc.ui.QUI.JSUI = new Class({
 
     topic.setStyle("top", topsize.y);
     
-    middle.setStyle("top", (topsize.y + topicsize.y));
+    last5_height = 0;
+    if(document.getElementById('last5messages')){
+        last5 = document.getElementById('last5messages');
+        last5.className = "dynamicpanel lines";
+        last5.style.top = topsize.y + topicsize.y + 'px';
+        last5.style.width = mwidth + 'px';
+        last5.style.zIndex = '1';
+        last5.style.borderBottom = '1px dashed #C8D1DB';
+        last5_height = last5.offsetHeight;
+        middle.setStyle("top", (topsize.y + topicsize.y + last5.offsetHeight));
+    }else{
+        middle.setStyle("top", (topsize.y + topicsize.y));
+    }
+
     if(mheight > 0) {
-      middle.setStyle("height", mheight - 25);
+      middle.setStyle("height", mheight - 25 - last5_height);
       right.setStyle("height", mheight);
     }
     
@@ -417,6 +430,7 @@ qwebirc.ui.QUI.Window = new Class({
           element.innerHTML = this.name;
 
           highlightText();
+          this.reflow();
       }
     }.bind(this));
     this.tab.addEvent("dblclick", function(e) {
@@ -465,8 +479,10 @@ qwebirc.ui.QUI.Window = new Class({
     this.lines = new Element("div");
     this.parentObject.qjsui.applyClasses("middle", this.lines);
     this.lines.addClass("lines");
-    if(type != qwebirc.ui.WINDOW_CUSTOM && type != qwebirc.ui.WINDOW_CONNECT)
+    if(type != qwebirc.ui.WINDOW_CUSTOM && type != qwebirc.ui.WINDOW_CONNECT){
       this.lines.addClass("ircwindow");
+      this.lines.id = 'mainircwindow';
+    }
     
     this.lines.addEvent("scroll", function() {
       this.scrolleddown = this.scrolledDown();
@@ -719,6 +735,7 @@ qwebirc.ui.QUI.Window = new Class({
     this.lastcolour = !this.lastcolour;
 
     this.parent(type, line, colourClass, e);
+    this.reflow();
   },
   setHilighted: function(state) {
     var laststate = this.hilighted;
