@@ -16,8 +16,13 @@ function highlightText(){
     e = document.getElementById('mainircwindow').childNodes;
     invisibleMessagesFromTarget = [];
     last5 = '';
+    last5BackgroundColor = '';
     messagesFromTarget = '';
     visibleMessagesFromTarget = 0;
+    visibleMark = 0;
+    if(e.length > 150){
+       visibleMark = e.length - 150;
+    }
     for(i = 0; i < e.length; i++){
           s = e[i].getElementsByTagName('span');
           target = '';
@@ -35,12 +40,10 @@ function highlightText(){
                       target = target.substr(target.search('#'));
                       if(target == document.getElementById('channel-name-id').innerHTML){
                           e[i].style.backgroundColor = '#ffffbf';
-                          if(e[i].offsetTop >= document.getElementById('mainircwindow').scrollTop && e[i].offsetTop <= document.getElementById('mainircwindow').offsetHeight + document.getElementById('mainircwindow').scrollTop){
+                          last5BackgroundColor = '#ffffbf';
+                          if(i >= visibleMark && (e[i].offsetTop >= document.getElementById('mainircwindow').scrollTop && e[i].offsetTop <= document.getElementById('mainircwindow').offsetHeight + document.getElementById('mainircwindow').scrollTop)){
                               visibleMessagesFromTarget++;
-                          }else{
-                              invisibleMessagesFromTarget[invisibleMessagesFromTarget.length] = e[i].outerHTML;
-                          }
-                      }
+                          }                      }
                   }else if(target.search(window.nickname) >= 0){
                       e[i].style.backgroundColor = '#ffbcaf';
                   }
@@ -50,12 +53,10 @@ function highlightText(){
                           e[i].style.backgroundColor = '#ffded6';
                       }else{
                           e[i].style.backgroundColor = '#ffbcaf';
-                          if(e[i].offsetTop >= document.getElementById('mainircwindow').scrollTop && e[i].offsetTop <= document.getElementById('mainircwindow').offsetHeight + document.getElementById('mainircwindow').scrollTop){
+                          last5BackgroundColor = '#ffbcaf';
+                          if(i >= visibleMark && (e[i].offsetTop >= document.getElementById('mainircwindow').scrollTop && e[i].offsetTop <= document.getElementById('mainircwindow').offsetHeight + document.getElementById('mainircwindow').scrollTop)){
                               visibleMessagesFromTarget++;
-                          }else{
-                              invisibleMessagesFromTarget[invisibleMessagesFromTarget.length] = e[i].outerHTML;
-                          }
-                      }
+                          }                      }
                   }
               }
           }
@@ -65,17 +66,26 @@ function highlightText(){
         toDelete = document.getElementById('last5messages');
         toDelete.parentNode.removeChild(toDelete);
     }
-    if(document.window.selectedChannel == '#brouhaha' && visibleMessagesFromTarget < 5 && invisibleMessagesFromTarget.length > 0){
+    e = IRC.windows[document.getElementById('channel-name-id').innerHTML].lines.getElementsByTagName('div');
+    for(i = 0; i < e.length; i++){
+        r = new RegExp('<span class="Xc4">==</span><span>');
+        if(!r.test(e[i].innerHTML)){
+            invisibleMessagesFromTarget[invisibleMessagesFromTarget.length] = e[i].innerHTML;
+        }
+    }
+    if(document.window.selectedChannel == '#brouhaha' && visibleMessagesFromTarget < 5){
         last5 = new Element("div");
+        last5.style.backgroundColor = last5BackgroundColor;
         main_parent = document.getElementById('mainircwindow');
         main_parent = main_parent.parentNode;
         main_parent.insertBefore(last5, document.getElementById('mainircwindow'));
         messagesFromTarget = '';
         i = 0;
-        if(5 - visibleMessagesFromTarget < invisibleMessagesFromTarget.length)
-            i = invisibleMessagesFromTarget.length - (5 - visibleMessagesFromTarget)
-        for(; i < invisibleMessagesFromTarget.length; i++){
-            messagesFromTarget += invisibleMessagesFromTarget[i];
+        if(invisibleMessagesFromTarget.length > 5){
+            i = invisibleMessagesFromTarget.length - 5;
+        }
+        for(; i < invisibleMessagesFromTarget.length - visibleMessagesFromTarget; i++){
+            messagesFromTarget += '<div>' + invisibleMessagesFromTarget[i] + '</div>';
         }
         last5.innerHTML = messagesFromTarget;
         last5.id = 'last5messages';

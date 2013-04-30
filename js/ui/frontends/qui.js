@@ -351,7 +351,7 @@ qwebirc.ui.QUI.JSUI = new Class({
     last5_height = 0;
     if(document.getElementById('last5messages')){
         last5 = document.getElementById('last5messages');
-        last5.className = "dynamicpanel lines";
+        last5.className = "qwebirc-qui ircwindow dynamicpanel lines";
         last5.style.top = topsize.y + topicsize.y + 'px';
         last5.style.width = mwidth + 'px';
         last5.style.zIndex = '1';
