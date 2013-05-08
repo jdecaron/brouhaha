@@ -66,7 +66,10 @@ function highlightText(){
         toDelete = document.getElementById('last5messages');
         toDelete.parentNode.removeChild(toDelete);
     }
-    e = IRC.windows[document.getElementById('channel-name-id').innerHTML].lines.getElementsByTagName('div');
+    e = 0;
+    if(document.getElementById('channel-name-id').innerHTML.toLowerCase() in IRC.windows){
+        e = IRC.windows[document.getElementById('channel-name-id').innerHTML.toLowerCase()].lines.getElementsByTagName('div');
+    }
     for(i = 0; i < e.length; i++){
         r = new RegExp('<span class="Xc4">==</span><span>');
         if(!r.test(e[i].innerHTML)){
@@ -75,6 +78,14 @@ function highlightText(){
     }
     if(document.window.selectedChannel == '#brouhaha' && visibleMessagesFromTarget < 5){
         last5 = new Element("div");
+        if(last5BackgroundColor == ''){
+            r = new RegExp('#');
+            if(r.test(document.getElementById('channel-name-id').innerHTML)){
+                last5BackgroundColor = '#ffffbf';
+            }else{
+                last5BackgroundColor = '#ffbcaf';
+            }
+        }
         last5.style.backgroundColor = last5BackgroundColor;
         main_parent = document.getElementById('mainircwindow');
         main_parent = main_parent.parentNode;
