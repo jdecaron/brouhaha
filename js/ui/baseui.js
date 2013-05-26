@@ -118,6 +118,7 @@ qwebirc.ui.BaseUI = new Class({
     if(this.active)
       this.active.deselect();
     window.select();  /* calls setActiveWindow */
+    document.window.selectedChannel = window.name;
     this.updateTitle(window.name + " - " + this.options.appTitle);
   },
   updateTitle: function(text) {
