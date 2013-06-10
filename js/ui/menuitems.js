@@ -50,11 +50,6 @@ qwebirc.ui.MENU_ITEMS = function() {
       predicate: true
     },
     {
-      text: "slap",
-      fn: function(nick) { this.client.exec("/ME slaps " + nick + " around a bit with a large fishbot"); },
-      predicate: true
-    },
-    {
       text: "kick", /* TODO: disappear when we're deopped */
       fn: function(nick) { this.client.exec("/KICK " + nick + " wibble"); },
       predicate: isOpped
