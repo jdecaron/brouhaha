@@ -1,4 +1,4 @@
-import twisted, sys, codecs, traceback
+import twisted, os, sys, codecs, traceback
 from twisted.words.protocols import irc
 from twisted.internet import reactor, protocol, abstract
 from twisted.web import resource, server
@@ -6,6 +6,7 @@ from twisted.protocols import basic
 from twisted.names.client import Resolver
 import hmac, time, config, random, qwebirc.config_options as config_options
 from config import HMACTEMPORAL
+import qwebirc.identd
 
 if config.get("CONNECTION_RESOLVER"):
   CONNECTION_RESOLVER = Resolver(servers=config.get("CONNECTION_RESOLVER"))
@@ -80,6 +81,8 @@ class QWebIRCClient(basic.LineReceiver):
     self.__nickname = nick
     self.__perform = f.get("perform")
 
+    qwebirc.identd.user_dict[self.transport.getHost().port] = ident
+
     if not hasattr(config, "WEBIRC_MODE"):
       self.write("USER %s bleh bleh %s :%s" % (ident, ip, realname))
     elif config.WEBIRC_MODE == "hmac":
@@ -152,7 +155,10 @@ def createIRC(*args, **kwargs):
     tcpkwargs["bindAddress"] = (config.OUTGOING_IP, 0)
   
   if CONNECTION_RESOLVER is None:
-    reactor.connectTCP(config.IRCSERVER, config.IRCPORT, f, **tcpkwargs)
+    if config.IRCCLIENTHOST:
+      reactor.connectTCP(config.IRCSERVER, config.IRCPORT, f, bindAddress=(config.IRCCLIENTHOST,0))
+    else:
+      reactor.connectTCP(config.IRCSERVER,config.IRCPORT,f)
     return f
 
   def callback(result):

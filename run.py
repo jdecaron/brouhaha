@@ -5,11 +5,27 @@ bin.compile.vcheck()
 
 DEFAULT_PORT = 9090
 
+from qwebirc.identd import IdentProtocol,IdentFactory
+from twisted.scripts.twistd import run
+from twisted.internet import reactor
 from optparse import OptionParser
-import sys, os, config
+import sys, os, grp, pwd, config
+
+def add_identd(ip):
+	if config.ENABLE_IDENTD:
+		reactor.listenTCP(1113,IdentFactory(),interface=ip)
+		
+		# Demote self
+		if os.getgid() == 0:
+			new_gid = grp.getgrnam(config.RUNGID)[2]
+			os.setgroups([new_gid])
+			os.setgid(new_gid)
+		
+		if os.getuid() == 0:
+			new_uid = pwd.getpwnam(config.RUNUID)[2]
+			os.setuid(new_uid)
 
 def run_twistd(args1=None, args2=None):
-  from twisted.scripts.twistd import run
   args = [sys.argv[0]]
   if args1 is not None:
     args.extend(args1)
@@ -37,11 +53,8 @@ parser.add_option("-l", "--logfile", help="Path to twisted log file.", dest="log
 parser.add_option("-c", "--clf", help="Path to web CLF (Combined Log Format) log file.", dest="clogfile")
 parser.add_option("-C", "--certificate", help="Path to SSL certificate.", dest="sslcertificate")
 parser.add_option("-k", "--key", help="Path to SSL key.", dest="sslkey")
-parser.add_option("-H", "--certificate-chain", help="Path to SSL certificate chain file.", dest="sslchain")
 parser.add_option("-P", "--pidfile", help="Path to store PID file", dest="pidfile")
 parser.add_option("-s", "--syslog", help="Log to syslog", action="store_true", dest="syslog", default=False)
-parser.add_option("--profile", help="Run in profile mode, dumping results to this file", dest="profile")
-parser.add_option("--profiler", help="Name of profiler to use", dest="profiler")
 parser.add_option("--syslog-prefix", help="Syslog prefix", dest="syslog_prefix", default="qwebirc")
 
 sargs = sys.argv[1:]
@@ -59,20 +72,14 @@ if options.debug:
   args1.append("-b")
 
 if options.reactor != DEFAULT_REACTOR:
-  rn = options.reactor + "reactor"
-  getattr(__import__("twisted.internet", fromlist=[rn]), rn).install()
+  args1+=["--reactor", options.reactor]
 if options.logfile:
   args1+=["--logfile", options.logfile]
 if options.pidfile:
   args1+=["--pidfile", options.pidfile]
 if options.syslog:
   args1+=["--syslog"]
-if options.profile:
-  args1+=["--profile", options.profile]
-if options.profiler:
-  args1+=["--profiler", options.profiler]
-
-if options.syslog and options.syslog_prefix:
+if options.syslog_prefix:
   import syslog
   syslog.openlog(options.syslog_prefix)
 
@@ -83,11 +90,10 @@ if options.clogfile:
 
 if options.sslcertificate and options.sslkey:
   args2+=["--certificate", options.sslcertificate, "--privkey", options.sslkey, "--https", options.port]
-  if options.sslchain:
-    args2+=["--certificate-chain", options.sslchain]
 else:
   args2+=["--port", options.port]
 
 args2+=["--ip", options.ip]
 
+add_identd(options.ip)
 run_twistd(args1, args2)

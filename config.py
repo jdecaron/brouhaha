@@ -18,7 +18,13 @@ from qwebirc.config_options import *
 #         Hostname (or IP address) of IRC server to connect to.
 # OPTION: IRCPORT
 #         Port of IRC server to connect to.
-IRCSERVER, IRCPORT = "webirc.gamesurge.net", 6007
+IRCSERVER, IRCPORT = "us.quakenet.org", 6667
+
+# OPTION: IRCCLIENTHOST
+#         The address that the IRC client should connect *from*. Set
+#         to None if you don't care, otherwise a string containing a
+#         hostname or IP address.
+IRCCLIENTHOST = None 
 
 # OPTION: REALNAME
 #         The realname field of IRC clients will be set to this value.
@@ -41,6 +47,39 @@ IDENT = IDENT_HEX
 #         You will need to call run.py with the --ip/-i option if you 
 #         want that.
 #OUTGOING_IP = "127.0.0.1"
+
+# OPTION: IDENT_FORWARDED_USER_HEADER
+#         The IDENT_FORWARDED_USER option above causes qwebirc to use 
+#         the value specified in a HTTP header (typically set by 
+#         mod_proxy) as a user's ident. The header to use can be set 
+#         here.
+IDENT_FORWARDED_USER_HEADER = "X-Forwarded-User"
+
+# OPTION: ENABLE_IDENTD
+#         Whether or not to enable the built-in identd server. Some IRC
+#         daemons are set to require an ident server, which causes 
+#         problems with web based IRC clients, as they tend to run as 
+#         the web server user. Requires port 113 to be open, the RUNUID
+#         and RUNGID settings to be correctly set, and for the 
+#         application to be run initially as root (it will demote 
+#         itself once bound to port 113).
+ENABLE_IDENTD = True
+
+# OPTION: RUNUID
+#         When identd is enabled (see ENABLE_IDENTD), the program must 
+#         initially run as root to bind to port 113. As soon as this has
+#         been achieved, the program will drop privileges to the user ID
+#         specified here
+RUNUID = "jdcaron"
+
+# OPTION: RUNGID
+#         The group ID to drop privileges to. See RUNUID for an 
+#         explanation.
+RUNGID = "jdcaron"
+
+# OPTION: IDENTD_OS
+#         The OS returned by identd.
+IDENTD_OS = "LINUX"
 
 # OPTION: WEBIRC_MODE
 #         This option controls how the IP/hostname of the connecting
@@ -67,12 +106,12 @@ IDENT = IDENT_HEX
 #         - the literal value None, i.e. WEBIRC_MODE = None
 #           Send the IP and hostname in the realname field, overrides
 #          the REALNAME option.
-WEBIRC_MODE = None
+WEBIRC_MODE = "webirc"
 
 # OPTION: WEBIRC_PASSWORD
 #         Used for WEBIRC_MODE webirc and cgiirc, see WEBIRC_MODE
 #         option documentation.
-#WEBIRC_PASSWORD = "fish"
+WEBIRC_PASSWORD = "gamesurge"
 
 # OPTION: CGIIRC_STRING
 #         Command sent to IRC server in for cgiirc WEBIRC_MODE.
@@ -163,12 +202,12 @@ ADMIN_ENGINE_HOSTS = ["127.0.0.1"]
 #         If you're using a proxy that passes through a forwarded-for
 #         header set this option to the header name, also set
 #         FORWARDED_FOR_IPS.
-#FORWARDED_FOR_HEADER="x-forwarded-for"
+FORWARDED_FOR_HEADER="x-forwarded-for"
  
 # OPTION: FORWARDED_FOR_IPS
 #         This option specifies the IP addresses that forwarded-for
 #         headers will be accepted from.
-#FORWARDED_FOR_IPS=["127.0.0.1"]
+FORWARDED_FOR_IPS=["127.0.0.1"]
 
 # EXECUTION OPTIONS
 # ---------------------------------------------------------------------
@@ -176,7 +215,7 @@ ADMIN_ENGINE_HOSTS = ["127.0.0.1"]
 # OPTION: ARGS (optional)
 #         These arguments will be used as if qwebirc was run directly
 #         with them, see run.py --help for a list of options.
-#ARGS = "-n -p 3989"
+#ARGS = "-i 127.0.0.1 -p 9090"
 
 # OPTION: SYSLOG_ADDR (optional)
 #         Used in conjunction with util/syslog.py and -s option.
