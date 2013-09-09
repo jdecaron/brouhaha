@@ -98,7 +98,10 @@ qwebirc.irc.Commands = new Class({
       return;
     }
 
-    this.parentObject.newWindow(args[0], qwebirc.ui.WINDOW_QUERY, true);
+    document.getElementById('channel-name-id').innerHTML = args[0];
+    if(document.window.selectedChannel != '#brouhaha'){
+        this.parentObject.newWindow(args[0], qwebirc.ui.WINDOW_QUERY, true);
+    }
 
     if((args.length > 1) && (args[1] != ""))
       return ["SAY", args[1]];
