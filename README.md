@@ -1,5 +1,8 @@
-Installation instructions are on the website:  
+Outdated installation instructions are on the website:  
 http://qwebirc.org/faq  
+
+Additional dependencies:  
+* Node and node package manager (>= 0.6.0) --- see `package.json`
   
 To get started configure the `config.py` file as necessary and compile the static resources as follows:  
 ```
